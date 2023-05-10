@@ -6,6 +6,8 @@ import {
   Select,
   CheckIcon,
   CloseIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from 'native-base';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import PasswordType from './PasswordType';
@@ -58,6 +60,24 @@ const Input = ({
       {iconRight}
     </>
   );
+  const iconRightModifiedOpen = (
+    <>
+      {name in errors && <CloseIcon mr={1} color={'red.800'} size={5} />}
+      {Object.keys(errors).length > 0 && !(name in errors) && (
+        <CheckIcon mr={1} color={'green.800'} size={6} />
+      )}
+      <ChevronUpIcon size={6} mr={2} />
+    </>
+  );
+  const iconRightModifiedClose = (
+    <>
+      {name in errors && <CloseIcon mr={1} color={'red.800'} size={5} />}
+      {Object.keys(errors).length > 0 && !(name in errors) && (
+        <CheckIcon mr={1} color={'green.800'} size={6} />
+      )}
+      <ChevronDownIcon size={6} mr={2} />
+    </>
+  );
   return (
     <>
       {type == 'date' ? (
@@ -93,7 +113,8 @@ const Input = ({
               endIcon: <CheckIcon size="5" />,
             }}
             mt={1}
-            InputRightElement={iconRightModified}
+            dropdownOpenIcon={iconRightModifiedOpen}
+            dropdownCloseIcon={iconRightModifiedClose}
             onValueChange={value => {
               setForm({...form, [name]: value});
             }}>
