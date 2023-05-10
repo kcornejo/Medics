@@ -9,7 +9,8 @@ import {
   Divider,
   Text,
 } from 'native-base';
-import {validationsObjV2} from '../support/Support';
+import {Input as InputKc} from '../components/Input';
+import {validationForm} from '../support/Support';
 import {AlertMedicsContext, LoadContext, UserContext} from '../support/Context';
 import Register from './Register';
 import AlertMedics from '../support/AlertMedics';
@@ -22,14 +23,7 @@ const Login = () => {
   const [user, setUser] = useContext(UserContext);
   const [visibleRegister, setVisibleRegister] = useState(false);
   const check_credentials = async (data: {}) => {
-    setAlerts({
-      ...alerts,
-      show: false,
-    });
-    setErrors(errors => {
-      return {};
-    });
-    const validation = validationsObjV2(data, [
+    const validation = [
       {
         isRequired: true,
         regex: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -43,23 +37,8 @@ const Login = () => {
         regexHelp:
           'Ingrese una clave segura y valida, caracteres permitidos: .,-,@,$',
       },
-    ]);
-    if (validation.error) {
-      for (let i = 0; i < validation.list.length; i++) {
-        setErrors(errors => {
-          return {
-            ...errors,
-            [validation.list[i].obj]: validation.list[i].message,
-          };
-        });
-      }
-      setAlerts({
-        show: true,
-        type: 'error',
-        title: 'Error',
-        message: 'Por favor valida la información ingresada.',
-      });
-    } else {
+    ];
+    const success = async data => {
       setLoad(true);
       try {
         const auth_ret = await auth_firebase(formData.email, formData.password);
@@ -90,9 +69,17 @@ const Login = () => {
       } catch (e) {
         console.log(e.message);
       }
-
       setLoad(false);
-    }
+    };
+    validationForm(
+      data,
+      setErrors,
+      setAlerts,
+      errors,
+      alerts,
+      validation,
+      success,
+    );
   };
   return (
     <>
@@ -107,43 +94,27 @@ const Login = () => {
               </Text>
             </VStack>
             <VStack mx={10} alignItems={'center'}>
-              <FormControl isRequired isInvalid={'email' in errors}>
-                <FormControl.Label>Correo</FormControl.Label>
-                <Input
-                  value={formData.email}
-                  onChangeText={email => {
-                    setData({...formData, email});
-                  }}></Input>
-                {'email' in errors ? (
-                  <FormControl.ErrorMessage>
-                    {errors.email}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  <FormControl.HelperText>
-                    Ingrese su correo
-                  </FormControl.HelperText>
-                )}
-              </FormControl>
+              <InputKc
+                errors={errors}
+                form={formData}
+                setForm={setData}
+                label="Correo"
+                placeholder="Ingrese su Correo"
+                name={'email'}
+                help="Ingrese su Correo"
+              />
             </VStack>
             <VStack mx={10} alignItems={'center'}>
-              <FormControl isRequired isInvalid={'password' in errors}>
-                <FormControl.Label>Password</FormControl.Label>
-                <Input
-                  value={formData.password}
-                  onChangeText={password => {
-                    setData({...formData, password});
-                  }}
-                  type="password"></Input>
-                {'password' in errors ? (
-                  <FormControl.ErrorMessage>
-                    {errors.password}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  <FormControl.HelperText>
-                    Ingrese su password
-                  </FormControl.HelperText>
-                )}
-              </FormControl>
+              <InputKc
+                errors={errors}
+                form={formData}
+                setForm={setData}
+                label="Contraseña"
+                placeholder="Ingrese su Contraseña"
+                name={'password'}
+                help="Ingrese su Contraseña"
+                type="password"
+              />
             </VStack>
             <VStack mx={10} alignItems={'center'}>
               <Pressable
