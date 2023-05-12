@@ -65,9 +65,14 @@ const StepFour = ({setVentana, setFormData, formData}) => {
       success,
     );
   };
+  const cambioVentana = step => {
+    if (step < 3) {
+      setVentana(step + 1);
+    }
+  };
   return (
     <Box safeAreaTop mt={3}>
-      <Steps labels={labels} currentPosition={3} />
+      <Steps labels={labels} onPress={cambioVentana} currentPosition={3} />
       <Box alignItems="center">
         <ScrollView w={'85%'} alignContent={'center'}>
           <VStack

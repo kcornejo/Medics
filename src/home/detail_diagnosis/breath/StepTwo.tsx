@@ -69,9 +69,14 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
     'Tratamiento',
   ];
   const [error, setError] = useState({});
+  const cambioVentana = step => {
+    if (step < 1) {
+      setVentana(step + 1);
+    }
+  };
   return (
     <Box safeAreaTop mt={3}>
-      <Steps labels={labels} currentPosition={1} />
+      <Steps labels={labels} onPress={cambioVentana} currentPosition={1} />
       <Box alignItems="center">
         <ScrollView w={'85%'} alignContent={'center'}>
           <VStack

@@ -11,14 +11,14 @@ const StepThree = ({setVentana, setFormData, formData}) => {
   ];
   const [error, setError] = useState({});
   const scrollRef = useRef(null);
-  const scrollToInitial = () => {
-    //scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
-    //scrollRef.current.scrollTo({x: 5, y: 5, animated: true});
-    //console.log('aca');
+  const cambioVentana = step => {
+    if (step < 2) {
+      setVentana(step + 1);
+    }
   };
   return (
     <Box safeAreaTop mt={3}>
-      <Steps labels={labels} currentPosition={2} />
+      <Steps labels={labels} onPress={cambioVentana} currentPosition={2} />
       <Box alignItems="center">
         <ScrollView w={'85%'} alignContent={'center'}>
           <VStack
