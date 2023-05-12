@@ -19,7 +19,7 @@ const Main = () => {
   return (
     <>
       {ventana == 1 && <History />}
-      {ventana == 2 && <Home />}
+      {ventana == 2 && <Home ventanaPadre={ventana} />}
       {ventana == 3 && <Config />}
       <BarBottom setOption={setVentana} />
     </>

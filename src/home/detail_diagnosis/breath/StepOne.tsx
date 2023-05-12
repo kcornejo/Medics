@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Box, ScrollView, VStack, Text, Pressable} from 'native-base';
 import {LogBox} from 'react-native';
 import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
-const StepOne = ({setVentana}) => {
+import {validationForm} from '../../../support/Support';
+import {AlertMedicsContext} from '../../../support/Context';
+const StepOne = ({setVentana, setFormData, formData}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
@@ -12,10 +14,10 @@ const StepOne = ({setVentana}) => {
     'Gases Arteriales',
     'Signos Vitales',
     'Tratamiento',
-    'Reporte Final',
   ];
   const [error, setError] = useState({});
-  const [formData, setFormData] = useState({});
+
+  const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const optionsTr = [
     {value: 'NoTOT', label: 'No. TOT'},
     {value: 'NoTQT', label: 'No. TQT'},
@@ -46,103 +48,145 @@ const StepOne = ({setVentana}) => {
     {value: 'APRV', label: 'APRV'},
     {value: 'PRVC', label: 'PRVC'},
   ];
-  const nextStep = () => {
-    setVentana(2);
+  const nextStep = formData => {
+    const validation = [
+      {
+        isRequired: true,
+        obj: 'DispositivosTR',
+      },
+      {
+        isRequired: true,
+        obj: 'Ventilador',
+      },
+      {
+        isRequired: true,
+        obj: 'ModoVentilatorio',
+      },
+    ];
+    if (formData.DispositivosTR == 'NoTOT') {
+      validation.push(
+        {isRequired: true, obj: 'NoToT'},
+        {isRequired: true, obj: 'NumeroFijacion'},
+      );
+    }
+    const success = () => {
+      setVentana(2);
+    };
+    validationForm(
+      formData,
+      setError,
+      setAlerts,
+      error,
+      alerts,
+      validation,
+      success,
+    );
   };
   return (
     <Box safeAreaTop mt={3}>
       <Steps labels={labels} currentPosition={0} />
-      <ScrollView>
-        <VStack
-          alignItems={'center'}
-          mx="10%"
-          flex="1"
-          justifyContent="flex-end"
-          w="100%"
-          maxW="300">
-          <Text fontSize={'xl'} bold my={3}>
-            Seguimiento
-          </Text>
-          <Input
-            placeholder="Dispositivos de TR"
-            type="select"
-            options={optionsTr}
-            label="Dispositivos de TR"
-            name="DispositivosTR"
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
-          {formData['DispositivosTR'] == 'NoTOT' && (
+      <Box alignItems="center">
+        <ScrollView w={'85%'} alignContent={'center'}>
+          <VStack
+            alignItems={'center'}
+            flex="1"
+            justifyContent="flex-end"
+            w="100%">
+            <Text fontSize={'xl'} bold my={3}>
+              Seguimiento
+            </Text>
             <Input
-              placeholder="No. TOT"
-              label="No. TOT"
-              keyboardType="numeric"
-              name="NoToT"
+              placeholder="Dispositivos de TR"
+              type="select"
+              options={optionsTr}
+              label="Dispositivos de TR"
+              name="DispositivosTR"
               errors={error}
               form={formData}
               setForm={setFormData}
             />
-          )}
-          <Text fontSize="md" bold my={3}>
-            Parámetros Ventilatorios
-          </Text>
-          <Input
-            placeholder="Ventilador"
-            label="Ventilador"
-            name="Ventilador"
-            type="select"
-            options={optionsVentilador}
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
-          <Input
-            placeholder="Modo Ventilatorio"
-            label="Modo Ventilatorio"
-            name="ModoVentilatorio"
-            type="select"
-            options={optionsModoVentilatorio}
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
+            {formData['DispositivosTR'] == 'NoTOT' && (
+              <>
+                <Input
+                  placeholder="No. TOT"
+                  label="No. TOT"
+                  keyboardType="numeric"
+                  name="NoToT"
+                  errors={error}
+                  form={formData}
+                  setForm={setFormData}
+                />
+                <Input
+                  placeholder="Numero de Fijación"
+                  label="Numero de Fijación"
+                  keyboardType="numeric"
+                  name="NumeroFijacion"
+                  errors={error}
+                  form={formData}
+                  setForm={setFormData}
+                />
+              </>
+            )}
+            <Text fontSize="md" bold my={3}>
+              Parámetros Ventilatorios
+            </Text>
+            <Input
+              placeholder="Ventilador"
+              label="Ventilador"
+              name="Ventilador"
+              type="select"
+              options={optionsVentilador}
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
+            <Input
+              placeholder="Modo Ventilatorio"
+              label="Modo Ventilatorio"
+              name="ModoVentilatorio"
+              type="select"
+              options={optionsModoVentilatorio}
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
 
-          <Pressable
-            bg="emerald.300"
-            mt={5}
-            w={'100%'}
-            shadow={3}
-            rounded={'2xl'}
-            borderWidth="0.1"
-            onPress={() => {
-              nextStep(formData);
-            }}>
-            <Box p="2" borderColor="coolGray.300">
-              <Text fontSize="xl" textAlign={'center'}>
-                Continuar
-              </Text>
-            </Box>
-          </Pressable>
-          <Pressable
-            bg="info.600"
-            w={'100%'}
-            mt={4}
-            mb={20}
-            shadow={3}
-            rounded={'2xl'}
-            borderWidth="0.1"
-            onPress={() => {
-              //setVentana(1);
-            }}>
-            <Box p="2" borderColor="coolGray.300">
-              <Text fontSize="xl" textAlign={'center'}>
-                Inicio
-              </Text>
-            </Box>
-          </Pressable>
-        </VStack>
-      </ScrollView>
+            <Pressable
+              bg="emerald.300"
+              mt={5}
+              w={'100%'}
+              shadow={3}
+              rounded={'2xl'}
+              borderWidth="0.1"
+              onPress={() => {
+                nextStep(formData);
+              }}>
+              <Box p="2" borderColor="coolGray.300">
+                <Text fontSize="xl" textAlign={'center'}>
+                  Continuar
+                </Text>
+              </Box>
+            </Pressable>
+            <Pressable
+              bg="info.600"
+              w={'100%'}
+              mt={4}
+              mb={20}
+              shadow={3}
+              rounded={'2xl'}
+              borderWidth="0.1"
+              onPress={() => {
+                setVentana(1);
+              }}>
+              <Box p="2" borderColor="coolGray.300">
+                <Text fontSize="xl" textAlign={'center'}>
+                  Inicio
+                </Text>
+              </Box>
+            </Pressable>
+          </VStack>
+        </ScrollView>
+      </Box>
     </Box>
   );
 };

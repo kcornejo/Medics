@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Pressable, ScrollView, Text, Box, VStack} from 'native-base';
 import NewPerson from './NewPerson';
 import MoreInfoPerson from './MoreInfoPerson';
 import Diagnosis from './Diagnosis';
 import AlertMedics from '../support/AlertMedics';
-import StepOne from './detail_diagnosis/breath/StepOne';
 import DiagnosisHome from './detail_diagnosis/breath/DiagnosisHome';
-const Home = () => {
-  const [ventana, setVentana] = useState(1);
+const Home = ({ventanaPadre}) => {
+  const [ventana, setVentana] = useState(5);
   const [formData, setFormData] = useState({});
   return (
     <>

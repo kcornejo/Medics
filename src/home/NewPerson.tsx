@@ -47,92 +47,92 @@ const NewPerson = ({setVentana, formData, setFormData}) => {
       success,
     );
   };
-  const labels = ['Info General', 'Info Específica', 'Diagnóstico'];
+  const labels = ['Información General', 'Información Específica'];
   return (
     <Box safeAreaTop mt={3}>
       <Steps labels={labels} currentPosition={0} />
-      <ScrollView>
-        <VStack
-          alignItems={'center'}
-          mx="10%"
-          flex="1"
-          justifyContent="flex-end"
-          w="100%"
-          maxW="300">
-          <Text fontSize={'xl'} bold my={3}>
-            Nuevo Paciente
-          </Text>
-          <Input
-            placeholder="Fecha"
-            type="date"
-            label="Fecha"
-            name="Fecha"
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
-          <Input
-            placeholder="Número de Cama"
-            label="Número de Cama"
-            keyboardType="numeric"
-            name="NoCama"
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
-          <Input
-            placeholder="Número de Registro"
-            label="Número de Registro"
-            keyboardType="numeric"
-            name="NoRegistro"
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
-          <Input
-            placeholder="Nombre del Paciente"
-            label="Nombre del Paciente"
-            name="Nombre"
-            errors={error}
-            form={formData}
-            setForm={setFormData}
-          />
+      <Box alignItems="center">
+        <ScrollView w={'85%'} alignContent={'center'}>
+          <VStack
+            alignItems={'center'}
+            flex="1"
+            justifyContent="flex-end"
+            w="100%">
+            <Text fontSize={'xl'} bold my={3}>
+              Nuevo Paciente
+            </Text>
+            <Input
+              placeholder="Fecha"
+              type="date"
+              label="Fecha"
+              name="Fecha"
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
+            <Input
+              placeholder="Número de Cama"
+              label="Número de Cama"
+              keyboardType="numeric"
+              name="NoCama"
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
+            <Input
+              placeholder="Número de Registro"
+              label="Número de Registro"
+              keyboardType="numeric"
+              name="NoRegistro"
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
+            <Input
+              placeholder="Nombre del Paciente"
+              label="Nombre del Paciente"
+              name="Nombre"
+              errors={error}
+              form={formData}
+              setForm={setFormData}
+            />
 
-          <Pressable
-            bg="emerald.300"
-            mt={5}
-            w={'100%'}
-            shadow={3}
-            rounded={'2xl'}
-            borderWidth="0.1"
-            onPress={() => {
-              nextStep(formData);
-            }}>
-            <Box p="2" borderColor="coolGray.300">
-              <Text fontSize="xl" textAlign={'center'}>
-                Continuar
-              </Text>
-            </Box>
-          </Pressable>
-          <Pressable
-            bg="info.600"
-            w={'100%'}
-            mt={4}
-            mb={20}
-            shadow={3}
-            rounded={'2xl'}
-            borderWidth="0.1"
-            onPress={() => {
-              setVentana(1);
-            }}>
-            <Box p="2" borderColor="coolGray.300">
-              <Text fontSize="xl" textAlign={'center'}>
-                Inicio
-              </Text>
-            </Box>
-          </Pressable>
-        </VStack>
-      </ScrollView>
+            <Pressable
+              bg="emerald.300"
+              mt={5}
+              w={'100%'}
+              shadow={3}
+              rounded={'2xl'}
+              borderWidth="0.1"
+              onPress={() => {
+                nextStep(formData);
+              }}>
+              <Box p="2" borderColor="coolGray.300">
+                <Text fontSize="xl" textAlign={'center'}>
+                  Continuar
+                </Text>
+              </Box>
+            </Pressable>
+            <Pressable
+              bg="info.600"
+              w={'100%'}
+              mt={4}
+              mb={20}
+              shadow={3}
+              rounded={'2xl'}
+              borderWidth="0.1"
+              onPress={() => {
+                setVentana(1);
+              }}>
+              <Box p="2" borderColor="coolGray.300">
+                <Text fontSize="xl" textAlign={'center'}>
+                  Inicio
+                </Text>
+              </Box>
+            </Pressable>
+          </VStack>
+        </ScrollView>
+      </Box>
     </Box>
   );
 };
