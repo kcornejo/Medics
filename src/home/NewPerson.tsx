@@ -4,7 +4,7 @@ import {Input} from '../components/Input';
 import Steps from './Steps';
 import {validationForm} from '../support/Support';
 import {AlertMedicsContext} from '../support/Context';
-const NewPerson = ({setVentana, formData, setFormData}) => {
+const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [error, setError] = useState({});
   const nextStep = formData => {
@@ -122,7 +122,7 @@ const NewPerson = ({setVentana, formData, setFormData}) => {
               rounded={'2xl'}
               borderWidth="0.1"
               onPress={() => {
-                setVentana(1);
+                setShowIndex(true);
               }}>
               <Box p="2" borderColor="coolGray.300">
                 <Text fontSize="xl" textAlign={'center'}>

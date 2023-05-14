@@ -6,7 +6,7 @@ import {Input} from '../components/Input';
 import {AlertMedicsContext, LoadContext} from '../support/Context';
 import {validationForm} from '../support/Support';
 import {savePerson} from './Firebase';
-const MoreInfoPerson = ({setVentana, formData, setFormData}) => {
+const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
@@ -46,7 +46,8 @@ const MoreInfoPerson = ({setVentana, formData, setFormData}) => {
       let formDataSave = formData;
       formDataSave['FechaIngreso'] = new Date();
       try {
-        await savePerson(formData);
+        const id = await savePerson(formData);
+        setIdPerson(id);
         Alert.alert(
           'Exito',
           'Paciente almacenado correctamente, desea realizar su seguimiento?',

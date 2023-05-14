@@ -69,6 +69,9 @@ const StepOne = ({setVentana, setFormData, formData}) => {
         {isRequired: true, obj: 'NumeroFijacion'},
       );
     }
+    if (formData.DispositivosTR.toString().search('Mascarilla') >= 0) {
+      validation.push({isRequired: true, obj: 'Litros por Minuto'});
+    }
     const success = () => {
       setVentana(2);
     };
@@ -121,6 +124,19 @@ const StepOne = ({setVentana, setFormData, formData}) => {
                   label="Numero de Fijación"
                   keyboardType="numeric"
                   name="NumeroFijacion"
+                  errors={error}
+                  form={formData}
+                  setForm={setFormData}
+                />
+              </>
+            )}
+            {formData.DispositivosTR?.toString().search('Mascarilla') >= 0 && (
+              <>
+                <Input
+                  placeholder="Litros por Minuto"
+                  label="Litros por Minuto"
+                  keyboardType="numeric"
+                  name="Litros por Minuto"
                   errors={error}
                   form={formData}
                   setForm={setFormData}

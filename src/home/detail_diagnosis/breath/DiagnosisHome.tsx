@@ -4,7 +4,7 @@ import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
 import StepFive from './StepFive';
-const DiagnosisHome = () => {
+const DiagnosisHome = ({idPerson, setShowIndex}) => {
   const [ventana, setVentana] = useState(1);
   const [formData, setFormData] = useState({});
   return (
@@ -31,7 +31,9 @@ const DiagnosisHome = () => {
         <StepFour
           setVentana={setVentana}
           formData={formData}
-          setFormData={setFormData}></StepFour>
+          setFormData={setFormData}
+          setShowIndex={setShowIndex}
+          idPerson={idPerson}></StepFour>
       )}
       {ventana == 5 && <StepFive setVentana={setVentana}></StepFive>}
     </>
