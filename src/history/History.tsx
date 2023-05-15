@@ -1,17 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {
-  FlatList,
-  Box,
-  Text,
-  HStack,
-  Badge,
-  Pressable,
-  ScrollView,
-} from 'native-base';
+import {FlatList, Box, Text, HStack, Badge, Pressable} from 'native-base';
 import {list_patients} from './Firebase';
 import {LoadContext} from '../support/Context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DiagnosisHome from '../home/detail_diagnosis/breath/DiagnosisHome';
+import AlertMedics from '../support/AlertMedics';
 const History = ({setShowIndex, showIndex}) => {
   const [load, setLoad] = useContext(LoadContext);
   const [data, setData] = useState([]);
@@ -34,6 +27,7 @@ const History = ({setShowIndex, showIndex}) => {
   }, [1]);
   return (
     <Box flex={1} bg="white">
+      <AlertMedics />
       {showIndex ? (
         <>
           <Text fontSize={'xl'} textAlign={'center'} bold mt={5}>
