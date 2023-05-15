@@ -42,6 +42,13 @@ export default function Register({visible = false, setVisible = {}}) {
         regexHelp:
           'Ingrese una clave segura y valida, caracteres permitidos: .,-,@,$',
       },
+      {
+        isRequired: true,
+        regex: /^[0-9a-zA-Z\.\-\$\@\*]{6,}$/,
+        obj: 'repeatPassword',
+        regexHelp:
+          'Ingrese una clave segura y valida, caracteres permitidos: .,-,@,$',
+      },
     ]);
     if (validation.error) {
       for (let i = 0; i < validation.list.length; i++) {

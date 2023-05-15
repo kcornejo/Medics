@@ -1,5 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {FlatList, Box, Text, HStack, Badge, Pressable} from 'native-base';
+import {
+  FlatList,
+  Box,
+  Text,
+  HStack,
+  Badge,
+  Pressable,
+  ScrollView,
+} from 'native-base';
 import {list_patients} from './Firebase';
 import {LoadContext} from '../support/Context';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +34,7 @@ const History = ({setShowIndex, showIndex}) => {
   }, [1]);
   return (
     <>
-      <Box flex={1}>
+      <ScrollView flex={1}>
         {showIndex ? (
           <>
             <Text fontSize={'xl'} textAlign={'center'} bold mt={5}>
@@ -47,7 +55,7 @@ const History = ({setShowIndex, showIndex}) => {
         ) : (
           <DiagnosisHome idPerson={idPerson} setShowIndex={setShowIndex} />
         )}
-      </Box>
+      </ScrollView>
     </>
   );
 };
@@ -58,29 +66,48 @@ function ListObj({item, setShowIndex, setIdPerson}) {
         setIdPerson(item.Id);
         setShowIndex(false);
       }}>
-      <Box
-        m={3}
-        rounded={'xl'}
-        h={70}
-        bg={item.Genero == 'Masculino' ? 'info.200' : 'red.200'}>
-        <HStack h={'100%'} justifyContent={'center'} space={3}>
-          <Box justifyContent={'center'}>
-            {item.Genero == 'Masculino' ? (
-              <Icon name="male" size={50} />
-            ) : (
-              <Icon name="female" size={50} />
-            )}
+      {({isHovered, isFocused, isPressed}) => {
+        return (
+          <Box
+            m={3}
+            rounded={'xl'}
+            h={70}
+            style={{
+              transform: [
+                {
+                  scale: isPressed ? 0.96 : 1,
+                },
+              ],
+            }}
+            bg={
+              item.Genero == 'Masculino'
+                ? isPressed
+                  ? 'info.400'
+                  : 'info.200'
+                : isPressed
+                ? 'red.400'
+                : 'red.200'
+            }>
+            <HStack h={'100%'} justifyContent={'center'} space={3}>
+              <Box justifyContent={'center'} w={'10%'}>
+                {item.Genero == 'Masculino' ? (
+                  <Icon name="male" size={50} />
+                ) : (
+                  <Icon name="female" size={50} />
+                )}
+              </Box>
+              <Box justifyContent={'center'} w={'50%'}>
+                <Text fontSize={'xl'}>{item.Nombre}</Text>
+              </Box>
+              <Box justifyContent={'center'} w={'15%'}>
+                <Badge rounded={'full'}>
+                  <Text fontSize={'2xl'}>{item.Cama}</Text>
+                </Badge>
+              </Box>
+            </HStack>
           </Box>
-          <Box justifyContent={'center'}>
-            <Text fontSize={'xl'}>{item.Nombre}</Text>
-          </Box>
-          <Box justifyContent={'center'} w={'50%'} alignItems={'flex-end'}>
-            <Badge rounded={'full'}>
-              <Text fontSize={'2xl'}>{item.Cama}</Text>
-            </Badge>
-          </Box>
-        </HStack>
-      </Box>
+        );
+      }}
     </Pressable>
   );
 }

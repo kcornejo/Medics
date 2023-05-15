@@ -19,7 +19,7 @@ const Config = () => {
           }}>
           <Box p="2" borderColor="coolGray.300">
             <Text fontSize="xl" textAlign={'center'}>
-              Salir
+              Cerrar Sesión
             </Text>
           </Box>
         </Pressable>

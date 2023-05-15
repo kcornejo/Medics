@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Box, VStack, Text, Pressable, ScrollView} from 'native-base';
 import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
+import Button from '../../../components/Button';
 const StepThree = ({setVentana, setFormData, formData}) => {
   const labels = [
     'Parametros Ventilatorios',
@@ -89,40 +90,27 @@ const StepThree = ({setVentana, setFormData, formData}) => {
               setForm={setFormData}
               isRequired={false}
             />
-
-            <Pressable
-              bg="emerald.300"
-              mt={5}
+            <Button
+              color="emerald.300"
+              boldText={false}
               w={'100%'}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Continuar'}
+              colorClick={'emerald.600'}
               onPress={() => {
                 setVentana(4);
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Continuar
-                </Text>
-              </Box>
-            </Pressable>
-            <Pressable
-              bg="info.600"
+              }}
+            />
+            <Button
+              color="info.600"
+              boldText={false}
               w={'100%'}
-              mt={4}
               mb={20}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Regresar'}
+              colorClick={'info.800'}
               onPress={() => {
                 setVentana(2);
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Regresar
-                </Text>
-              </Box>
-            </Pressable>
+              }}
+            />
           </VStack>
         </ScrollView>
       </Box>

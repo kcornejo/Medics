@@ -13,6 +13,7 @@ const DiagnosisHome = ({idPerson, setShowIndex}) => {
         <StepOne
           setVentana={setVentana}
           formData={formData}
+          setShowIndex={setShowIndex}
           setFormData={setFormData}></StepOne>
       )}
       {ventana == 2 && (

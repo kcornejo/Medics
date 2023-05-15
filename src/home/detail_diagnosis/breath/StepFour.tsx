@@ -16,6 +16,7 @@ import {AlertMedicsContext, LoadContext} from '../../../support/Context';
 import {validationForm} from '../../../support/Support';
 import {saveFeedback} from '../../Firebase';
 import Medicaments from './Medicaments';
+import Button from '../../../components/Button';
 const StepFour = ({
   setVentana,
   setFormData,
@@ -144,33 +145,66 @@ const StepFour = ({
               </Text>
               <HStack ml={10} alignItems={'center'}>
                 <Pressable
-                  bg="red.400"
-                  shadow={3}
-                  w={'8'}
-                  rounded={'2xl'}
-                  borderWidth="0.1"
                   onPress={() => {
                     if (contadorMed != 0) {
                       setContadorMed(contadorMed - 1);
                     }
                   }}>
-                  <Box p="2" borderColor="coolGray.300" alignItems={'center'}>
-                    <MinusIcon size={5} />
-                  </Box>
+                  {({isHovered, isFocused, isPressed}) => {
+                    return (
+                      <Box
+                        bg={isPressed ? 'red.600' : 'red.400'}
+                        shadow={3}
+                        w={'8'}
+                        ml={2}
+                        rounded={'2xl'}
+                        borderWidth="0.1"
+                        style={{
+                          transform: [
+                            {
+                              scale: isPressed ? 0.9 : 1,
+                            },
+                          ],
+                        }}>
+                        <Box
+                          p="2"
+                          borderColor="coolGray.300"
+                          alignItems={'center'}>
+                          <MinusIcon size={5} />
+                        </Box>
+                      </Box>
+                    );
+                  }}
                 </Pressable>
                 <Pressable
-                  bg="success.400"
-                  shadow={3}
-                  w={'8'}
-                  ml={2}
-                  rounded={'2xl'}
-                  borderWidth="0.1"
                   onPress={() => {
                     setContadorMed(contadorMed + 1);
                   }}>
-                  <Box p="2" borderColor="coolGray.300" alignItems={'center'}>
-                    <AddIcon size={5} />
-                  </Box>
+                  {({isHovered, isFocused, isPressed}) => {
+                    return (
+                      <Box
+                        bg={isPressed ? 'success.600' : 'success.400'}
+                        shadow={3}
+                        w={'8'}
+                        ml={2}
+                        rounded={'2xl'}
+                        borderWidth="0.1"
+                        style={{
+                          transform: [
+                            {
+                              scale: isPressed ? 0.9 : 1,
+                            },
+                          ],
+                        }}>
+                        <Box
+                          p="2"
+                          borderColor="coolGray.300"
+                          alignItems={'center'}>
+                          <AddIcon size={5} />
+                        </Box>
+                      </Box>
+                    );
+                  }}
                 </Pressable>
               </HStack>
             </HStack>
@@ -193,39 +227,27 @@ const StepFour = ({
               form={formData}
               setForm={setFormData}
             />
-            <Pressable
-              bg="emerald.300"
-              mt={5}
+            <Button
+              color="emerald.300"
+              boldText={false}
               w={'100%'}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Guardar'}
+              colorClick={'emerald.600'}
               onPress={() => {
-                nextStep();
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Guardar
-                </Text>
-              </Box>
-            </Pressable>
-            <Pressable
-              bg="info.600"
+                nextStep(formData);
+              }}
+            />
+            <Button
+              color="info.600"
+              boldText={false}
               w={'100%'}
-              mt={4}
               mb={20}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Regresar'}
+              colorClick={'info.800'}
               onPress={() => {
                 setVentana(3);
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Regresar
-                </Text>
-              </Box>
-            </Pressable>
+              }}
+            />
           </VStack>
         </ScrollView>
       </Box>

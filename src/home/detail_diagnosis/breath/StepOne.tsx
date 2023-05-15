@@ -5,7 +5,8 @@ import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
 import {validationForm} from '../../../support/Support';
 import {AlertMedicsContext} from '../../../support/Context';
-const StepOne = ({setVentana, setFormData, formData}) => {
+import Button from '../../../components/Button';
+const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
@@ -69,7 +70,7 @@ const StepOne = ({setVentana, setFormData, formData}) => {
         {isRequired: true, obj: 'NumeroFijacion'},
       );
     }
-    if (formData.DispositivosTR.toString().search('Mascarilla') >= 0) {
+    if (formData.DispositivosTR?.toString().search('Mascarilla') >= 0) {
       validation.push({isRequired: true, obj: 'Litros por Minuto'});
     }
     const success = () => {
@@ -166,40 +167,27 @@ const StepOne = ({setVentana, setFormData, formData}) => {
               form={formData}
               setForm={setFormData}
             />
-
-            <Pressable
-              bg="emerald.300"
-              mt={5}
+            <Button
+              color="emerald.300"
+              boldText={false}
               w={'100%'}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Continuar'}
+              colorClick={'emerald.600'}
               onPress={() => {
                 nextStep(formData);
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Continuar
-                </Text>
-              </Box>
-            </Pressable>
-            <Pressable
-              bg="info.600"
+              }}
+            />
+            <Button
+              color="info.600"
+              boldText={false}
               w={'100%'}
-              mt={4}
               mb={20}
-              shadow={3}
-              rounded={'2xl'}
-              borderWidth="0.1"
+              text={'Inicio'}
+              colorClick={'info.800'}
               onPress={() => {
-                setVentana(1);
-              }}>
-              <Box p="2" borderColor="coolGray.300">
-                <Text fontSize="xl" textAlign={'center'}>
-                  Inicio
-                </Text>
-              </Box>
-            </Pressable>
+                setShowIndex(true);
+              }}
+            />
           </VStack>
         </ScrollView>
       </Box>

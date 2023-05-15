@@ -6,6 +6,7 @@ import {Input} from '../components/Input';
 import {AlertMedicsContext, LoadContext} from '../support/Context';
 import {validationForm} from '../support/Support';
 import {savePerson} from './Firebase';
+import Button from '../components/Button';
 const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -81,9 +82,14 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
       success,
     );
   };
+  const cambioVentana = step => {
+    if (step === 0) {
+      setVentana(2);
+    }
+  };
   return (
     <Box safeAreaTop mt={3}>
-      <Steps labels={labels} currentPosition={1} />
+      <Steps labels={labels} onPress={cambioVentana} currentPosition={1} />
       <VStack alignItems={'center'} mx="10%">
         <Text fontSize={'xl'} bold my={3}>
           Nuevo Paciente
@@ -133,39 +139,27 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
           form={formData}
           setForm={setFormData}
         />
-        <Pressable
-          bg="emerald.300"
-          mt={5}
+        <Button
+          color="emerald.300"
+          boldText={false}
           w={'100%'}
-          shadow={3}
-          rounded={'2xl'}
-          borderWidth="0.1"
+          text={'Guardar'}
+          colorClick={'emerald.600'}
           onPress={() => {
             nextStep(formData);
-          }}>
-          <Box p="2" borderColor="coolGray.300">
-            <Text fontSize="xl" textAlign={'center'}>
-              Guardar
-            </Text>
-          </Box>
-        </Pressable>
-        <Pressable
-          bg="info.600"
+          }}
+        />
+        <Button
+          color="info.600"
+          boldText={false}
           w={'100%'}
-          mt={3}
           mb={20}
-          shadow={3}
-          rounded={'2xl'}
-          borderWidth="0.1"
+          text={'Regresar'}
+          colorClick={'info.800'}
           onPress={() => {
             setVentana(2);
-          }}>
-          <Box p="2" borderColor="coolGray.300">
-            <Text fontSize="xl" textAlign={'center'}>
-              Regresar
-            </Text>
-          </Box>
-        </Pressable>
+          }}
+        />
       </VStack>
     </Box>
   );
