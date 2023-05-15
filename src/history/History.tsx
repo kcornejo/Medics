@@ -33,30 +33,28 @@ const History = ({setShowIndex, showIndex}) => {
     });
   }, [1]);
   return (
-    <>
-      <ScrollView flex={1}>
-        {showIndex ? (
-          <>
-            <Text fontSize={'xl'} textAlign={'center'} bold mt={5}>
-              Listado de Pacientes
-            </Text>
-            <FlatList
-              data={data}
-              renderItem={({item}) => (
-                <>
-                  <ListObj
-                    item={item}
-                    setIdPerson={setIdPerson}
-                    setShowIndex={setShowIndex}
-                  />
-                </>
-              )}></FlatList>
-          </>
-        ) : (
-          <DiagnosisHome idPerson={idPerson} setShowIndex={setShowIndex} />
-        )}
-      </ScrollView>
-    </>
+    <Box flex={1} bg="white">
+      {showIndex ? (
+        <>
+          <Text fontSize={'xl'} textAlign={'center'} bold mt={5}>
+            Listado de Pacientes
+          </Text>
+          <FlatList
+            data={data}
+            renderItem={({item}) => (
+              <>
+                <ListObj
+                  item={item}
+                  setIdPerson={setIdPerson}
+                  setShowIndex={setShowIndex}
+                />
+              </>
+            )}></FlatList>
+        </>
+      ) : (
+        <DiagnosisHome idPerson={idPerson} setShowIndex={setShowIndex} />
+      )}
+    </Box>
   );
 };
 function ListObj({item, setShowIndex, setIdPerson}) {

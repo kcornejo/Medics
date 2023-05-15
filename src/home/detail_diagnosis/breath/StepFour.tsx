@@ -241,7 +241,7 @@ const StepFour = ({
               color="info.600"
               boldText={false}
               w={'100%'}
-              mb={20}
+              mb={200}
               text={'Regresar'}
               colorClick={'info.800'}
               onPress={() => {

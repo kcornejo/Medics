@@ -6,7 +6,7 @@ import Button from '../components/Button';
 const Home = ({setShowIndex, showIndex}) => {
   return (
     <>
-      <ScrollView bgColor={'info.50'} w={'100%'}>
+      <Box bgColor={'info.50'} w={'100%'} flex={1}>
         <AlertMedics />
         {showIndex == true && (
           <Box mx={5}>
@@ -23,7 +23,7 @@ const Home = ({setShowIndex, showIndex}) => {
           </Box>
         )}
         {showIndex == false && <NewPersonHome setShowIndex={setShowIndex} />}
-      </ScrollView>
+      </Box>
     </>
   );
 };

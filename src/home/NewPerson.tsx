@@ -5,6 +5,7 @@ import Steps from './Steps';
 import {validationForm} from '../support/Support';
 import {AlertMedicsContext} from '../support/Context';
 import Button from '../components/Button';
+import FlatListInput from '../components/FlatListInput';
 const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [error, setError] = useState({});
