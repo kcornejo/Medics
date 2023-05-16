@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   Box,
   VStack,
@@ -13,6 +13,7 @@ import {
 import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
 import {AlertMedicsContext, LoadContext} from '../../../support/Context';
+import {LogBox} from 'react-native';
 import {validationForm} from '../../../support/Support';
 import {saveFeedback} from '../../Firebase';
 import Medicaments from './Medicaments';
@@ -24,6 +25,9 @@ const StepFour = ({
   idPerson,
   setShowIndex,
 }) => {
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
   const labels = [
     'Parametros Ventilatorios',
     'Gases Arteriales',
@@ -117,15 +121,11 @@ const StepFour = ({
     }
   };
   return (
-    <Box safeAreaTop mt={3}>
-      <Steps labels={labels} onPress={cambioVentana} currentPosition={3} />
-      <Box alignItems="center">
-        <ScrollView w={'85%'} alignContent={'center'}>
-          <VStack
-            alignItems={'center'}
-            flex="1"
-            justifyContent="flex-end"
-            w="100%">
+    <Box safeAreaTop>
+      <Steps labels={labels} currentPosition={3} onPress={cambioVentana} />
+      <ScrollView w={'100%'} alignContent={'center'}>
+        <Box alignItems={'center'}>
+          <VStack alignItems={'center'} flex="1" w="85%">
             <Text fontSize={'xl'} bold my={3}>
               Tratamientos
             </Text>
@@ -241,7 +241,7 @@ const StepFour = ({
               color="info.600"
               boldText={false}
               w={'100%'}
-              mb={200}
+              mb={100}
               text={'Regresar'}
               colorClick={'info.800'}
               onPress={() => {
@@ -249,8 +249,8 @@ const StepFour = ({
               }}
             />
           </VStack>
-        </ScrollView>
-      </Box>
+        </Box>
+      </ScrollView>
     </Box>
   );
 };

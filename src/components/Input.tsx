@@ -27,6 +27,7 @@ const Input = ({
   startDate = new Date(),
   keyboardType = 'default',
   isFocused = false,
+  key_in = '',
 }) => {
   const [dateString, setDateString] = useState(startDate);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -55,7 +56,7 @@ const Input = ({
     <>
       {name in errors && <CloseIcon mr={1} color={'red.800'} size={5} />}
       {Object.keys(errors).length > 0 && !(name in errors) && (
-        <CheckIcon mr={1} color={'green.800'} size={6} />
+        <CheckIcon key={key_in + 'check'} mr={1} color={'green.800'} size={6} />
       )}
       {iconRight}
     </>
@@ -64,24 +65,25 @@ const Input = ({
     <>
       {name in errors && <CloseIcon mr={1} color={'red.800'} size={5} />}
       {Object.keys(errors).length > 0 && !(name in errors) && (
-        <CheckIcon mr={1} color={'green.800'} size={6} />
+        <CheckIcon key={key_in + 'check'} mr={1} color={'green.800'} size={6} />
       )}
-      <ChevronUpIcon size={6} mr={2} />
+      <ChevronUpIcon size={6} mr={2} key={key_in + 'up_icon'} />
     </>
   );
   const iconRightModifiedClose = (
     <>
       {name in errors && <CloseIcon mr={1} color={'red.800'} size={5} />}
       {Object.keys(errors).length > 0 && !(name in errors) && (
-        <CheckIcon mr={1} color={'green.800'} size={6} />
+        <CheckIcon key={key_in + 'check'} mr={1} color={'green.800'} size={6} />
       )}
-      <ChevronDownIcon size={6} mr={2} />
+      <ChevronDownIcon size={6} mr={2} key={key_in + 'down_icon'} />
     </>
   );
   return (
     <>
       {type == 'date' ? (
         <DateTimePickerModal
+          key={key_in + 'modal'}
           isVisible={isDatePickerVisible}
           mode="date"
           onConfirm={handleConfirm}
@@ -89,8 +91,11 @@ const Input = ({
           date={dateString}
         />
       ) : null}
-      <FormControl isRequired={isRequired} isInvalid={name in errors}>
-        <FormControl.Label>{label}</FormControl.Label>
+      <FormControl
+        isRequired={isRequired}
+        isInvalid={name in errors}
+        key={key_in + 'form'}>
+        <FormControl.Label key={key_in + 'label'}>{label}</FormControl.Label>
         {(type == 'input' || type == 'date') && (
           <InputBase
             keyboardType={keyboardType}
@@ -98,6 +103,7 @@ const Input = ({
             InputRightElement={iconRightModified}
             iconLeft={iconLeft}
             borderRadius={10}
+            key={key_in + 'input'}
             onFocus={showDatePicker}
             placeholder={placeholder}
             onChangeText={value => {
@@ -108,6 +114,7 @@ const Input = ({
           <Select
             selectedValue={form[name]}
             placeholder={placeholder}
+            key={key_in + 'select'}
             _selectedItem={{
               bg: 'teal.600',
               endIcon: <CheckIcon size="5" />,
@@ -122,9 +129,9 @@ const Input = ({
               const name_obj = object.label + '_' + i;
               return (
                 <Select.Item
+                  key={key_in + 'item' + name_obj}
                   label={object.label}
                   value={object.value}
-                  key={name_obj}
                 />
               );
             })}
@@ -132,6 +139,7 @@ const Input = ({
         )}
         {type == 'textarea' && (
           <TextArea
+            key={key_in + 'text_area'}
             keyboardType={keyboardType}
             value={form[name]}
             iconRight={iconRight}
@@ -146,6 +154,7 @@ const Input = ({
         )}
         {type == 'password' && (
           <PasswordType
+            key={key_in + 'password'}
             keyboardType={keyboardType}
             value={form[name]}
             iconRight={iconRightModified}
@@ -159,9 +168,13 @@ const Input = ({
         )}
 
         {name in errors ? (
-          <FormControl.ErrorMessage>{errors[name]}</FormControl.ErrorMessage>
+          <FormControl.ErrorMessage key={key_in + 'message'}>
+            {errors[name]}
+          </FormControl.ErrorMessage>
         ) : (
-          <FormControl.HelperText>{help}</FormControl.HelperText>
+          <FormControl.HelperText key={key_in + 'help'}>
+            {help}
+          </FormControl.HelperText>
         )}
       </FormControl>
     </>

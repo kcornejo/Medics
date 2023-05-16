@@ -18,15 +18,11 @@ const StepThree = ({setVentana, setFormData, formData}) => {
     }
   };
   return (
-    <Box safeAreaTop mt={3}>
-      <Steps labels={labels} onPress={cambioVentana} currentPosition={2} />
-      <Box alignItems="center">
-        <ScrollView w={'85%'} alignContent={'center'}>
-          <VStack
-            alignItems={'center'}
-            flex="1"
-            justifyContent="flex-end"
-            w="100%">
+    <Box safeAreaTop>
+      <Steps labels={labels} currentPosition={2} onPress={cambioVentana} />
+      <ScrollView w={'100%'} alignContent={'center'}>
+        <Box alignItems={'center'}>
+          <VStack alignItems={'center'} flex="1" w="85%">
             <Text fontSize={'xl'} bold my={3}>
               Signos Vitales
             </Text>
@@ -104,7 +100,7 @@ const StepThree = ({setVentana, setFormData, formData}) => {
               color="info.600"
               boldText={false}
               w={'100%'}
-              mb={200}
+              mb={100}
               text={'Regresar'}
               colorClick={'info.800'}
               onPress={() => {
@@ -112,8 +108,8 @@ const StepThree = ({setVentana, setFormData, formData}) => {
               }}
             />
           </VStack>
-        </ScrollView>
-      </Box>
+        </Box>
+      </ScrollView>
     </Box>
   );
 };

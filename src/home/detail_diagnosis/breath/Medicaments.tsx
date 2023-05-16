@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'native-base';
+import {Text, Box} from 'native-base';
 import {Input} from '../../../components/Input';
 const Medicaments = ({number = 0, error, formData, setFormData}) => {
   const opcionesMedicamento = [
@@ -22,13 +22,14 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
   for (let i = 0; i < number; i++) {
     const numero_muestra = i + 1;
     retorno.push(
-      <>
-        <Text key={'med_text' + i} fontSize={'md'}>
+      <Box flex={1} w="100%" key={'box' + i}>
+        <Text key={'med_text' + i} fontSize={'md'} textAlign="center">
           Medicamento {numero_muestra}
         </Text>
         <Input
           placeholder="Medicamento"
           type="select"
+          key_in={'med_med' + numero_muestra}
           key={'med_med' + numero_muestra}
           options={opcionesMedicamento}
           label="Medicamento"
@@ -40,6 +41,7 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
         <Input
           placeholder="Horario"
           type="select"
+          key_in={'med_hor' + numero_muestra}
           key={'med_hor' + numero_muestra}
           options={opcionesFrecuencia}
           label="Horario"
@@ -48,7 +50,7 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
           form={formData}
           setForm={setFormData}
         />
-      </>,
+      </Box>,
     );
   }
   return retorno;

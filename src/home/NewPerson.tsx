@@ -51,15 +51,11 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   };
   const labels = ['Información General', 'Información Específica'];
   return (
-    <Box safeAreaTop mt={3}>
+    <Box safeAreaTop>
       <Steps labels={labels} currentPosition={0} />
-      <Box alignItems="center">
-        <ScrollView w={'85%'} alignContent={'center'}>
-          <VStack
-            alignItems={'center'}
-            flex="1"
-            justifyContent="flex-end"
-            w="100%">
+      <ScrollView w={'100%'} alignContent={'center'}>
+        <Box alignItems={'center'}>
+          <VStack alignItems={'center'} flex="1" w="85%">
             <Text fontSize={'xl'} bold my={3}>
               Nuevo Paciente
             </Text>
@@ -112,7 +108,7 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
               color="info.600"
               boldText={false}
               w={'100%'}
-              mb={20}
+              mb={100}
               text={'Inicio'}
               colorClick={'info.800'}
               onPress={() => {
@@ -120,8 +116,8 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
               }}
             />
           </VStack>
-        </ScrollView>
-      </Box>
+        </Box>
+      </ScrollView>
     </Box>
   );
 };
