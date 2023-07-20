@@ -10,43 +10,43 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
   const nextStep = () => {
     const validation = [
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'PH',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'CO2',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'HCO3',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'PaO2',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'EB',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'Lactato',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'FiO2',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'Plaquetas',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'Hemoglobina',
       },
       {
-        isRequired: true,
+        isRequired: false,
         obj: 'Interpretación de GSA',
       },
     ];
@@ -92,6 +92,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="CO2"
@@ -101,6 +102,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="HCO3"
@@ -110,6 +112,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="PaO2"
@@ -119,6 +122,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="EB"
@@ -128,6 +132,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="Lactato"
@@ -137,6 +142,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="FiO2"
@@ -146,6 +152,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="Plaquetas"
@@ -155,6 +162,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="Hemoglobina"
@@ -164,15 +172,17 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Input
               placeholder="Interpretación de GSA"
               label="Interpretación de GSA"
-              keyboardType="numeric"
+              keyboardType="default"
               name="Interpretación de GSA"
               errors={error}
               form={formData}
               setForm={setFormData}
+              isRequired={false}
             />
             <Button
               color="emerald.300"

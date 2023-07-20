@@ -28,6 +28,7 @@ const Input = ({
   keyboardType = 'default',
   isFocused = false,
   key_in = '',
+  selectedValue = null,
 }) => {
   const [dateString, setDateString] = useState(startDate);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -112,7 +113,7 @@ const Input = ({
         )}
         {type == 'select' && (
           <Select
-            selectedValue={form[name]}
+            selectedValue={selectedValue === null ? form[name] : selectedValue}
             placeholder={placeholder}
             key={key_in + 'select'}
             _selectedItem={{

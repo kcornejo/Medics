@@ -25,8 +25,15 @@ const StepFour = ({
   idPerson,
   setShowIndex,
 }) => {
+  const [contadorMed, setContadorMed] = useState(1);
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    if (
+      formData['Medicamentos'] !== undefined &&
+      formData['Medicamentos'].length > 0
+    ) {
+      setContadorMed(formData['Medicamentos'].length);
+    }
   }, []);
   const labels = [
     'Parametros Ventilatorios',
@@ -36,28 +43,12 @@ const StepFour = ({
   ];
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [load, setLoad] = useContext(AlertMedicsContext);
-  const opcionesMedicamento = [
-    {value: 'Salbutamol', label: 'Salbutamol'},
-    {value: 'Budesonida', label: 'Budesonida'},
-    {value: 'Tropium', label: 'Tropium'},
-    {value: 'Dexametasona', label: 'Dexametasona'},
-    {value: 'Alpha Dornasa', label: 'Alpha Dornasa'},
-    {value: 'Adrenalina Racemica', label: 'Adrenalina Racemica'},
-    {value: 'Hipertonica', label: 'Hipertonica'},
-  ];
   const opcionesTipo = [
     {value: 'Humeda', label: 'Humeda'},
     {value: 'Puff', label: 'Puff'},
   ];
-  const opcionesFrecuencia = [
-    {value: 'Cada 3 horas', label: 'Cada 3 horas'},
-    {value: 'Cada 4 horas', label: 'Cada 4 horas'},
-    {value: 'Cada 6 horas', label: 'Cada 6 horas'},
-    {value: 'Cada 8 horas', label: 'Cada 8 horas'},
-    {value: 'Cada 12 horas', label: 'Cada 12 horas'},
-  ];
   const [error, setError] = useState({});
-  const [contadorMed, setContadorMed] = useState(1);
+
   const nextStep = () => {
     let validation = [
       {
@@ -144,38 +135,40 @@ const StepFour = ({
                 Listado de Medicamentos
               </Text>
               <HStack ml={10} alignItems={'center'}>
-                <Pressable
-                  onPress={() => {
-                    if (contadorMed != 0) {
-                      setContadorMed(contadorMed - 1);
-                    }
-                  }}>
-                  {({isHovered, isFocused, isPressed}) => {
-                    return (
-                      <Box
-                        bg={isPressed ? 'red.600' : 'red.400'}
-                        shadow={3}
-                        w={'8'}
-                        ml={2}
-                        rounded={'2xl'}
-                        borderWidth="0.1"
-                        style={{
-                          transform: [
-                            {
-                              scale: isPressed ? 0.9 : 1,
-                            },
-                          ],
-                        }}>
+                {contadorMed > 0 ? (
+                  <Pressable
+                    onPress={() => {
+                      if (contadorMed != 0) {
+                        setContadorMed(contadorMed - 1);
+                      }
+                    }}>
+                    {({isHovered, isFocused, isPressed}) => {
+                      return (
                         <Box
-                          p="2"
-                          borderColor="coolGray.300"
-                          alignItems={'center'}>
-                          <MinusIcon size={5} />
+                          bg={isPressed ? 'red.600' : 'red.400'}
+                          shadow={3}
+                          w={'8'}
+                          ml={2}
+                          rounded={'2xl'}
+                          borderWidth="0.1"
+                          style={{
+                            transform: [
+                              {
+                                scale: isPressed ? 0.9 : 1,
+                              },
+                            ],
+                          }}>
+                          <Box
+                            p="2"
+                            borderColor="coolGray.300"
+                            alignItems={'center'}>
+                            <MinusIcon size={5} />
+                          </Box>
                         </Box>
-                      </Box>
-                    );
-                  }}
-                </Pressable>
+                      );
+                    }}
+                  </Pressable>
+                ) : null}
                 <Pressable
                   onPress={() => {
                     setContadorMed(contadorMed + 1);

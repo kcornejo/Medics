@@ -1,12 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
 import StepFive from './StepFive';
+import {getLastFeedback} from '../../Firebase';
 const DiagnosisHome = ({idPerson, setShowIndex}) => {
   const [ventana, setVentana] = useState(1);
   const [formData, setFormData] = useState({});
+  useEffect(() => {
+    getLastFeedback(idPerson).then(data => {
+      data.forEach(obj => {
+        setFormData(obj.data());
+      });
+    });
+  }, [1]);
+
   return (
     <>
       {ventana == 1 && (

@@ -1,7 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, Box} from 'native-base';
 import {Input} from '../../../components/Input';
 const Medicaments = ({number = 0, error, formData, setFormData}) => {
+  useEffect(() => {
+    if (
+      formData['Medicamentos'] !== undefined &&
+      formData['Medicamentos'].length > 0
+    ) {
+      for (let i = 0; i < formData['Medicamentos'].length; i++) {
+        console.log(formData['Medicamentos'][i].Medicamento);
+        setFormData(formData => {
+          return {
+            ...formData,
+            [`Medicamento ${i + 1}`]: formData['Medicamentos'][i].Medicamento,
+            [`Horario ${i + 1}`]: formData['Medicamentos'][i].Horario,
+          };
+        });
+      }
+    }
+  }, [1]);
   const opcionesMedicamento = [
     {value: 'Salbutamol', label: 'Salbutamol'},
     {value: 'Budesonida', label: 'Budesonida'},
@@ -19,6 +36,7 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
     {value: 'Cada 12 horas', label: 'Cada 12 horas'},
   ];
   const retorno = [];
+
   for (let i = 0; i < number; i++) {
     const numero_muestra = i + 1;
     retorno.push(

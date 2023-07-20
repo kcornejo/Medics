@@ -3,6 +3,7 @@ import {FlatList, Box, Text, HStack, Badge, Pressable} from 'native-base';
 import {list_patients} from './Firebase';
 import {LoadContext} from '../support/Context';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DiagnosisHome from '../home/detail_diagnosis/breath/DiagnosisHome';
 import AlertMedics from '../support/AlertMedics';
 const History = ({setShowIndex, showIndex}) => {
@@ -82,11 +83,7 @@ function ListObj({item, setShowIndex, setIdPerson}) {
             }>
             <HStack h={'100%'} justifyContent={'center'} space={3}>
               <Box justifyContent={'center'} w={'10%'}>
-                {item.Genero == 'Masculino' ? (
-                  <Icon name="male" size={50} />
-                ) : (
-                  <Icon name="female" size={50} />
-                )}
+                <FontAwesome5 size={50} name={'baby'} solid />
               </Box>
               <Box justifyContent={'center'} w={'50%'}>
                 <Text fontSize={'xl'}>{item.Nombre}</Text>

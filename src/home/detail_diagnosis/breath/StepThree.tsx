@@ -69,7 +69,7 @@ const StepThree = ({setVentana, setFormData, formData}) => {
             <Input
               placeholder="Presión Arterial"
               label="Presión Arterial"
-              keyboardType="numeric"
+              keyboardType="default"
               name="Presión Arterial"
               errors={error}
               form={formData}

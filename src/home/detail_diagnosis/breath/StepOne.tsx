@@ -20,8 +20,8 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
 
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const optionsTr = [
-    {value: 'NoTOT', label: 'No. TOT'},
-    {value: 'NoTQT', label: 'No. TQT'},
+    {value: 'TOT', label: 'TOT'},
+    {value: 'TQT', label: 'TQT'},
     {value: 'Canula Binasal', label: 'Canula Binasal'},
     {value: 'Mascarilla Simple', label: 'Mascarilla Simple'},
     {
