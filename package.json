@@ -1,5 +1,5 @@
 {
-  "name": "Medics",
+  "name": "medics",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,14 +10,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^7.0.1",
     "@react-native-firebase/app": "^17.4.2",
     "@react-native-firebase/auth": "^17.4.2",
     "@react-native-firebase/firestore": "^17.4.2",
     "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "0.71.6",
+    "react-native-modal-datetime-picker": "^15.0.0",
     "react-native-safe-area-context": "^3.3.2",
-    "react-native-svg": "^12.1.1"
+    "react-native-select-dropdown": "^3.3.4",
+    "react-native-step-indicator": "^1.0.3",
+    "react-native-svg": "^12.1.1",
+    "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
