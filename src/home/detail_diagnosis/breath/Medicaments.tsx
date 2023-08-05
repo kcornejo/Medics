@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Text, Box} from 'native-base';
 import {Input} from '../../../components/Input';
+import {SelectSimple} from '../../../components/SelectSimple';
 const Medicaments = ({number = 0, error, formData, setFormData}) => {
   useEffect(() => {
     if (
@@ -8,7 +9,6 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
       formData['Medicamentos'].length > 0
     ) {
       for (let i = 0; i < formData['Medicamentos'].length; i++) {
-        console.log(formData['Medicamentos'][i].Medicamento);
         setFormData(formData => {
           return {
             ...formData,
@@ -35,6 +35,10 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
     {value: 'Cada 8 horas', label: 'Cada 8 horas'},
     {value: 'Cada 12 horas', label: 'Cada 12 horas'},
   ];
+  const opcionesTipo = [
+    {value: 'Humeda', label: 'Humeda'},
+    {value: 'Puff', label: 'Puff'},
+  ];
   const retorno = [];
 
   for (let i = 0; i < number; i++) {
@@ -44,7 +48,18 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
         <Text key={'med_text' + i} fontSize={'md'} textAlign="center">
           Medicamento {numero_muestra}
         </Text>
-        <Input
+        <SelectSimple
+          placeholder="Tipo de Neubolización"
+          type="select"
+          options={opcionesTipo}
+          label="Tipo de Neubolización"
+          name={'Tipo de Neubolizacion ' + numero_muestra}
+          errors={error}
+          form={formData}
+          setForm={setFormData}
+        />
+
+        <SelectSimple
           placeholder="Medicamento"
           type="select"
           key_in={'med_med' + numero_muestra}
@@ -56,7 +71,34 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
           form={formData}
           setForm={setFormData}
         />
-        <Input
+        {formData['Tipo de Neubolizacion ' + numero_muestra] == 'Humeda' ? (
+          <Input
+            placeholder="Dosis"
+            type="input"
+            key_in={'med_dosis' + numero_muestra}
+            key={'med_dosis' + numero_muestra}
+            label="Dosis"
+            name={'Dosis ' + numero_muestra}
+            errors={error}
+            form={formData}
+            setForm={setFormData}
+          />
+        ) : null}
+        {formData['Tipo de Neubolizacion ' + numero_muestra] == 'Puff' ? (
+          <Input
+            placeholder="Cantidad"
+            type="input"
+            key_in={'med_cantidad' + numero_muestra}
+            key={'med_cantidad' + numero_muestra}
+            label="Cantidad"
+            name={'Cantidad ' + numero_muestra}
+            errors={error}
+            form={formData}
+            setForm={setFormData}
+          />
+        ) : null}
+
+        <SelectSimple
           placeholder="Horario"
           type="select"
           key_in={'med_hor' + numero_muestra}

@@ -70,7 +70,10 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
         {isRequired: true, obj: 'NumeroFijacion'},
       );
     }
-    if (formData.DispositivosTR?.toString().search('Mascarilla') >= 0) {
+    if (
+      formData.DispositivosTR?.toString().search('Mascarilla') >= 0 ||
+      formData.DispositivosTR?.toString().search('Canula') >= 0
+    ) {
       validation.push({isRequired: true, obj: 'Litros por Minuto'});
     }
     const success = () => {
@@ -127,19 +130,20 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
                 />
               </>
             )}
-            {formData.DispositivosTR?.toString().search('Mascarilla') >= 0 && (
-              <>
-                <Input
-                  placeholder="Litros por Minuto"
-                  label="Litros por Minuto"
-                  keyboardType="numeric"
-                  name="Litros por Minuto"
-                  errors={error}
-                  form={formData}
-                  setForm={setFormData}
-                />
-              </>
-            )}
+            {formData.DispositivosTR?.toString().search('Mascarilla') >= 0 ||
+              (formData.DispositivosTR?.toString().search('Canula') >= 0 && (
+                <>
+                  <Input
+                    placeholder="Litros por Minuto"
+                    label="Litros por Minuto"
+                    keyboardType="numeric"
+                    name="Litros por Minuto"
+                    errors={error}
+                    form={formData}
+                    setForm={setFormData}
+                  />
+                </>
+              ))}
             <Text fontSize="md" bold my={3}>
               Parámetros Ventilatorios
             </Text>

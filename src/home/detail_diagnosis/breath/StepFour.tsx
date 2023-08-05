@@ -43,18 +43,10 @@ const StepFour = ({
   ];
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [load, setLoad] = useContext(AlertMedicsContext);
-  const opcionesTipo = [
-    {value: 'Humeda', label: 'Humeda'},
-    {value: 'Puff', label: 'Puff'},
-  ];
   const [error, setError] = useState({});
 
   const nextStep = () => {
     let validation = [
-      {
-        isRequired: true,
-        obj: 'Tipo de Neubolizacion',
-      },
       {
         isRequired: true,
         obj: 'Reporte Final',
@@ -64,6 +56,21 @@ const StepFour = ({
       validation.push(
         {isRequired: true, obj: 'Medicamento ' + (i + 1)},
         {isRequired: true, obj: 'Horario ' + (i + 1)},
+        {isRequired: true, obj: 'Tipo de Neubolizacion ' + (i + 1)},
+        {
+          isRequired:
+            formData['Tipo de Neubolizacion ' + (i + 1)] == 'Humeda'
+              ? true
+              : false,
+          obj: 'Dosis ' + (i + 1),
+        },
+        {
+          isRequired:
+            formData['Tipo de Neubolizacion ' + (i + 1)] == 'Humeda'
+              ? false
+              : true,
+          obj: 'Cantidad ' + (i + 1),
+        },
       );
     }
     const success = async () => {
@@ -120,16 +127,6 @@ const StepFour = ({
             <Text fontSize={'xl'} bold my={3}>
               Tratamientos
             </Text>
-            <Input
-              placeholder="Tipo de Neubolización"
-              type="select"
-              options={opcionesTipo}
-              label="Tipo de Neubolización"
-              name="Tipo de Neubolizacion"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
             <HStack mb={1}>
               <Text fontSize={'md'} bold mt={2}>
                 Listado de Medicamentos
