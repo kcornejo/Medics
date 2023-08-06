@@ -103,6 +103,9 @@ const Input = ({
             value={form[name]}
             InputRightElement={iconRightModified}
             iconLeft={iconLeft}
+            style={{
+              height: 40,
+            }}
             borderRadius={10}
             key={key_in + 'input'}
             onFocus={showDatePicker}

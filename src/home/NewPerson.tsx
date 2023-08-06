@@ -19,9 +19,11 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
       },
       {
         isRequired: true,
-        regex: /^[0-9]+/,
+        regex: /^[0-9]{1,2}$/,
         obj: 'NoCama',
         regexHelp: 'Ingrese un número de cama valido.',
+        minValue: 1,
+        maxValue: 15,
       },
       {
         isRequired: true,
@@ -51,7 +53,7 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   };
   const labels = ['Información General', 'Información Específica'];
   return (
-    <Box safeAreaTop>
+    <Box safeAreaTop mt={5}>
       <Steps labels={labels} currentPosition={0} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>

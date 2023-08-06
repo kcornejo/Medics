@@ -6,6 +6,7 @@ import Steps from '../../Steps';
 import {validationForm} from '../../../support/Support';
 import {AlertMedicsContext} from '../../../support/Context';
 import Button from '../../../components/Button';
+import {SelectSimple} from '../../../components/SelectSimple';
 const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -90,7 +91,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
     );
   };
   return (
-    <Box safeAreaTop>
+    <Box safeAreaTop mt={5}>
       <Steps labels={labels} currentPosition={0} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>
@@ -98,7 +99,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
             <Text fontSize={'xl'} bold my={3}>
               Seguimiento
             </Text>
-            <Input
+            <SelectSimple
               placeholder="Dispositivos de TR"
               type="select"
               options={optionsTr}
@@ -110,7 +111,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
             />
             {formData['DispositivosTR'] == 'NoTOT' && (
               <>
-                <Input
+                <SelectSimple
                   placeholder="No. TOT"
                   label="No. TOT"
                   keyboardType="numeric"
@@ -119,7 +120,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
                   form={formData}
                   setForm={setFormData}
                 />
-                <Input
+                <SelectSimple
                   placeholder="Numero de Fijación"
                   label="Numero de Fijación"
                   keyboardType="numeric"
@@ -147,7 +148,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
             <Text fontSize="md" bold my={3}>
               Parámetros Ventilatorios
             </Text>
-            <Input
+            <SelectSimple
               placeholder="Ventilador"
               label="Ventilador"
               name="Ventilador"
@@ -157,7 +158,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
               form={formData}
               setForm={setFormData}
             />
-            <Input
+            <SelectSimple
               placeholder="Modo Ventilatorio"
               label="Modo Ventilatorio"
               name="ModoVentilatorio"

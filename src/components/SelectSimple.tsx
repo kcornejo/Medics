@@ -5,6 +5,7 @@ import {
   CloseIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  Text,
 } from 'native-base';
 import SelectDropdown from 'react-native-select-dropdown';
 const SelectSimple = ({
@@ -54,6 +55,10 @@ const SelectSimple = ({
         key={key_in + 'form'}>
         <FormControl.Label key={key_in + 'label'}>{label}</FormControl.Label>
         <SelectDropdown
+          dropdownIconPosition="right"
+          renderDropdownIcon={isOpened => {
+            return isOpened ? iconRightModifiedOpen : iconRightModifiedClose;
+          }}
           data={options_complete}
           defaultButtonText={'[Seleccione una opción]'}
           defaultValue={form[name]}
@@ -62,8 +67,8 @@ const SelectSimple = ({
           }}
           buttonStyle={{
             width: '100%',
-            height: 30,
-            backgroundColor: '#FFF',
+            height: 40,
+            backgroundColor: 'transparent',
             borderRadius: 8,
             borderWidth: 0.3,
             borderColor: 'grey',

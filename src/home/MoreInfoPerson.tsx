@@ -7,6 +7,7 @@ import {AlertMedicsContext, LoadContext} from '../support/Context';
 import {validationForm} from '../support/Support';
 import {savePerson} from './Firebase';
 import Button from '../components/Button';
+import {SelectSimple} from '../components/SelectSimple';
 const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -88,7 +89,7 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
     }
   };
   return (
-    <Box safeAreaTop>
+    <Box safeAreaTop mt={5}>
       <Steps labels={labels} currentPosition={1} onPress={cambioVentana} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>
@@ -104,7 +105,7 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
               form={formData}
               setForm={setFormData}
             />
-            <Input
+            <SelectSimple
               placeholder="Genero"
               label="Genero del Paciente"
               name="Genero"

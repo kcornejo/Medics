@@ -76,7 +76,7 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
     }
   };
   return (
-    <Box safeAreaTop>
+    <Box safeAreaTop mt={5}>
       <Steps labels={labels} currentPosition={1} onPress={cambioVentana} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>

@@ -8,6 +8,8 @@ const validationsObjV2 = (data: any, validations: any) => {
     const regex = validations[i].regex;
     const obj = validations[i].obj;
     const regexHelp = validations[i].regexHelp;
+    const minValue = validations[i].minValue;
+    const maxValue = validations[i].maxValue;
     if (
       isRequired &&
       (data[obj] === undefined || data[obj].toString().trim() == '')
@@ -37,6 +39,32 @@ const validationsObjV2 = (data: any, validations: any) => {
             obj: obj,
           });
         }
+      }
+    }
+    if (
+      minValue !== undefined &&
+      data[obj] !== undefined &&
+      data[obj].toString().trim() != ''
+    ) {
+      if (parseInt(data[obj]) < minValue) {
+        error = true;
+        list.push({
+          message: `El valor minimo es ${minValue}`,
+          obj: obj,
+        });
+      }
+    }
+    if (
+      maxValue !== undefined &&
+      data[obj] !== undefined &&
+      data[obj].toString().trim() != ''
+    ) {
+      if (parseInt(data[obj]) > maxValue) {
+        error = true;
+        list.push({
+          message: `El valor máximo es ${maxValue}`,
+          obj: obj,
+        });
       }
     }
   }
