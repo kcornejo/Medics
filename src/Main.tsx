@@ -4,18 +4,10 @@ import BarBottom from './components/BarBottom';
 import History from './history/History';
 import Config from './config/Config';
 const Main = () => {
-  const [ventana, setVentana] = useState(2);
   const [showIndex, setShowIndex] = useState(true);
   return (
     <>
-      {ventana == 1 && (
-        <History showIndex={showIndex} setShowIndex={setShowIndex} />
-      )}
-      {ventana == 2 && (
-        <Home showIndex={showIndex} setShowIndex={setShowIndex} />
-      )}
-      {ventana == 3 && <Config />}
-      <BarBottom setOption={setVentana} setShowIndex={setShowIndex} />
+      <Home showIndex={showIndex} setShowIndex={setShowIndex} />
     </>
   );
 };
