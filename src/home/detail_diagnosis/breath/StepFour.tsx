@@ -101,7 +101,7 @@ const StepFour = ({
         console.log(e.message);
       }
       //setLoad(false);
-      setShowIndex(true);
+      setShowIndex(1);
     };
     validationForm(
       formData,

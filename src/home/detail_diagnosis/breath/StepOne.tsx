@@ -186,7 +186,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
               text={'Inicio'}
               colorClick={'info.800'}
               onPress={() => {
-                setShowIndex(true);
+                setShowIndex(1);
               }}
             />
           </VStack>

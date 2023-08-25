@@ -114,7 +114,7 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
               text={'Inicio'}
               colorClick={'info.800'}
               onPress={() => {
-                setShowIndex(true);
+                setShowIndex(1);
               }}
             />
           </VStack>
