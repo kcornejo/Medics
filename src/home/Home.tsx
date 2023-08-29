@@ -3,7 +3,6 @@ import {Pressable, Box, Text, HStack, VStack} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AlertMedics from '../support/AlertMedics';
-import NewPersonHome from './NewPersonHome';
 import {UserContext} from '../support/Context';
 
 const Home = ({setShowIndex}) => {
@@ -34,7 +33,7 @@ const Home = ({setShowIndex}) => {
                           }}
                           h={'100%'}
                           alignItems={'center'}
-                          rounded="2xl"
+                          rounded="3xl"
                           justifyContent={'center'}
                           shadow={3}
                           borderColor="coolGray.300">
@@ -77,7 +76,11 @@ const Home = ({setShowIndex}) => {
                     );
                   }}
                 </Pressable>
-                <Pressable w="47.5%">
+                <Pressable
+                  w="47.5%"
+                  onPress={() => {
+                    setShowIndex(3);
+                  }}>
                   {({isHovered, isFocused, isPressed}) => {
                     return (
                       <Box
