@@ -31,7 +31,9 @@ const Home = ({setShowIndex}) => {
                               },
                             ],
                           }}
-                          h={'100%'}
+                          bg={'info.50'}
+                          w={'10'}
+                          h={'10'}
                           alignItems={'center'}
                           rounded="3xl"
                           justifyContent={'center'}
@@ -60,6 +62,7 @@ const Home = ({setShowIndex}) => {
                             },
                           ],
                         }}
+                        bg={'info.50'}
                         p="5"
                         borderTopLeftRadius={100}
                         h={'100%'}
@@ -91,6 +94,7 @@ const Home = ({setShowIndex}) => {
                             },
                           ],
                         }}
+                        bg={'info.50'}
                         p="5"
                         borderTopRightRadius={100}
                         h={'100%'}
@@ -121,6 +125,7 @@ const Home = ({setShowIndex}) => {
                           ],
                         }}
                         p="5"
+                        bg={'info.50'}
                         alignItems={'center'}
                         h={'100%'}
                         rounded="2xl"
@@ -148,6 +153,7 @@ const Home = ({setShowIndex}) => {
                         }}
                         p="5"
                         h={'100%'}
+                        bg={'info.50'}
                         rounded="2xl"
                         shadow={3}
                         alignItems={'center'}
@@ -179,6 +185,7 @@ const Home = ({setShowIndex}) => {
                         p="5"
                         alignItems={'center'}
                         h={'100%'}
+                        bg={'info.50'}
                         rounded="2xl"
                         shadow={3}
                         borderWidth="1"
@@ -205,6 +212,7 @@ const Home = ({setShowIndex}) => {
                         p="5"
                         alignItems={'center'}
                         h={'100%'}
+                        bg={'info.50'}
                         rounded="2xl"
                         shadow={3}
                         borderWidth="1"

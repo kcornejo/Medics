@@ -6,6 +6,7 @@ import {validationForm} from '../support/Support';
 import {AlertMedicsContext} from '../support/Context';
 import Button from '../components/Button';
 import FlatListInput from '../components/FlatListInput';
+import {BedUsed} from './Firebase';
 const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [error, setError] = useState({});
@@ -41,15 +42,27 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
     const success = () => {
       setVentana(3);
     };
-    validationForm(
-      formData,
-      setError,
-      setAlerts,
-      error,
-      alerts,
-      validation,
-      success,
-    );
+    BedUsed(parseInt(formData.NoCama)).then(response => {
+      const bedUsed = response.size >= 0 ? true : false;
+      if (!bedUsed) {
+        validationForm(
+          formData,
+          setError,
+          setAlerts,
+          error,
+          alerts,
+          validation,
+          success,
+        );
+      } else {
+        setAlerts({
+          show: true,
+          type: 'error',
+          title: 'Error',
+          message: 'Cama en uso.',
+        });
+      }
+    });
   };
   const labels = ['Información General', 'Información Específica'];
   return (

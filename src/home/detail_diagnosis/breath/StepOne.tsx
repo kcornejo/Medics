@@ -183,7 +183,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
               boldText={false}
               w={'100%'}
               mb={100}
-              text={'Inicio'}
+              text={'Regresar'}
               colorClick={'info.800'}
               onPress={() => {
                 setShowIndex(1);

@@ -24,4 +24,8 @@ const getLastFeedback = async (idPerson: string) => {
     .limit(1)
     .get();
 };
-export {savePerson, saveFeedback, getLastFeedback};
+const BedUsed = async (bed: number) => {
+  const firestore = firebase.firestore();
+  return await firestore.collection('patient').where('NoCama', '==', bed).get();
+};
+export {savePerson, saveFeedback, getLastFeedback, BedUsed};

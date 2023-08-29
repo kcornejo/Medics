@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import NewPerson from './NewPerson';
 import MoreInfoPerson from './MoreInfoPerson';
 import DiagnosisHome from './detail_diagnosis/breath/DiagnosisHome';
+import AlertMedics from '../support/AlertMedics';
 const NewPersonHome = ({setShowIndex}) => {
   const [ventana, setVentana] = useState(2);
   const [formData, setFormData] = useState({});
   const [idPerson, setIdPerson] = useState(null);
   return (
     <>
+      <AlertMedics />
       {ventana == 2 && (
         <NewPerson
           setVentana={setVentana}
