@@ -164,6 +164,9 @@ const Input = ({
             iconRight={iconRightModified}
             iconLeft={iconLeft}
             borderRadius={10}
+            style={{
+              height: 40,
+            }}
             placeholder={placeholder}
             setValue={value => {
               setForm({...form, [name]: value});

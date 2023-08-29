@@ -26,6 +26,6 @@ const getLastFeedback = async (idPerson: string) => {
 };
 const BedUsed = async (bed: number) => {
   const firestore = firebase.firestore();
-  return await firestore.collection('patient').where('NoCama', '==', bed).get();
+  return await firestore.collection('patient').where('NoCama', '==', bed).where('Cerrado', '==', false).get();
 };
 export {savePerson, saveFeedback, getLastFeedback, BedUsed};

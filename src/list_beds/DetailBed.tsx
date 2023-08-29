@@ -1,14 +1,31 @@
-import {HStack, VStack, Box, Pressable, Image, Text, Modal} from 'native-base';
-import React, {FC, useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Box, Image, Text, Modal} from 'native-base';
+import React, {useState} from 'react';
 import Button from '../components/Button';
-import {Input as InputBase} from 'native-base';
-import {searchPatient} from './Firebase';
-import {list_patients} from '../history/Firebase';
-import {BedUsed} from '../home/Firebase';
 import DiagnosisHome from '../home/detail_diagnosis/breath/DiagnosisHome';
-const DetailBed = ({cargandoDetail, patient, setModal, modal}) => {
+import { closedBed } from './Firebase';
+import { Alert } from 'react-native';
+const DetailBed = ({cargandoDetail, patient, setModal, modal,setPatient}) => {
   const [follow, setFollow] = useState(false);
+  const closed_bed = async(id: string) => {
+    Alert.alert(
+      'Cerrar Caso',
+      'Estas seguro que deseas cerrar el caso?',
+      [
+        {
+          text: 'Si',
+          onPress: async () => {
+            await closedBed(id);
+            setModal(false)
+            setPatient({})
+          },
+        },
+        {
+          text: 'No',
+        },
+      ],
+    );
+    
+  }
   return (
     <Modal isOpen={modal} bg="white" w={'100%'} h={'100%'}>
       {cargandoDetail ? (
@@ -74,7 +91,7 @@ const DetailBed = ({cargandoDetail, patient, setModal, modal}) => {
                   text={'Cerrar Caso'}
                   colorClick={'red.800'}
                   onPress={() => {
-                    setModal(false);
+                    closed_bed(patient.id)
                   }}
                 />
                 <Button
@@ -86,6 +103,7 @@ const DetailBed = ({cargandoDetail, patient, setModal, modal}) => {
                   colorClick={'info.800'}
                   onPress={() => {
                     setModal(false);
+                    setPatient({})
                   }}
                 />
               </>

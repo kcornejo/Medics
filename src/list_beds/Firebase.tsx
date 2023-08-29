@@ -8,4 +8,11 @@ const searchPatient = async (buscador: string) => {
     .where('Nombre', '<', buscador + '\uf8ff')
     .get();
 };
-export {searchPatient};
+const closedBed = async(id: string) => {
+  const firestore = firebase.firestore();
+  return await firestore
+    .collection('patient')
+    .doc(id)
+    .update({"Cerrado" : true})
+}
+export {searchPatient,closedBed};

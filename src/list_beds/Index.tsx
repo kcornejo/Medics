@@ -20,14 +20,17 @@ const PrintButton: FC = ({
       mr={'3.33%'}
       mb={'5%'}
       onPress={() => {
-        setModal(true);
-        setCargando(true);
-        BedUsed(bed_number).then(response => {
-          response.forEach(item => {
-            setPatient({id: item.id, ...item.data()});
+        if(listBed.includes(bed_number)){
+          setModal(true);
+          setCargando(true);
+          BedUsed(bed_number).then(response => {
+            response.forEach(item => {
+              setPatient({id: item.id, ...item.data()});
+            });
+            setCargando(false);
           });
-          setCargando(false);
-        });
+        }
+       
       }}>
       {({isHovered, isFocused, isPressed}) => {
         return (
@@ -97,7 +100,7 @@ export const Index: FC<any> = ({setShowIndex}) => {
       setBeds(beds_temp);
       setCargando(false);
     });
-  }, [1]);
+  }, [patient]);
   const buscar = async (texto: string) => {
     const retorno = await searchPatient(texto);
     setCargando(false);
@@ -114,6 +117,8 @@ export const Index: FC<any> = ({setShowIndex}) => {
         setModal={setModal}
         patient={patient}
         cargandoDetail={cargandoDetail}
+        setPatient={setPatient}
+        setBeds={setBeds}
       />
       <VStack h={'100%'} safeAreaTop mx={'5%'}>
         <Box w={'100%'} alignItems={'center'}>
