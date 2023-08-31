@@ -65,7 +65,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
         obj: 'ModoVentilatorio',
       },
     ];
-    if (formData.DispositivosTR == 'NoTOT') {
+    if (formData.DispositivosTR == 'TOT') {
       validation.push(
         {isRequired: true, obj: 'NoToT'},
         {isRequired: true, obj: 'NumeroFijacion'},
@@ -109,9 +109,9 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
               form={formData}
               setForm={setFormData}
             />
-            {formData['DispositivosTR'] == 'NoTOT' && (
+            {formData['DispositivosTR'] == 'TOT' && (
               <>
-                <SelectSimple
+                <Input
                   placeholder="No. TOT"
                   label="No. TOT"
                   keyboardType="numeric"
@@ -120,7 +120,7 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
                   form={formData}
                   setForm={setFormData}
                 />
-                <SelectSimple
+                <Input
                   placeholder="Numero de Fijación"
                   label="Numero de Fijación"
                   keyboardType="numeric"
