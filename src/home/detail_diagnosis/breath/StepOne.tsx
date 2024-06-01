@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Box, ScrollView, VStack, Text, Pressable} from 'native-base';
+import {Box, ScrollView, VStack, Text, Image} from 'native-base';
 import {LogBox} from 'react-native';
 import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
@@ -7,6 +7,7 @@ import {validationForm} from '../../../support/Support';
 import {AlertMedicsContext} from '../../../support/Context';
 import Button from '../../../components/Button';
 import {SelectSimple} from '../../../components/SelectSimple';
+import LinearGradient from 'react-native-linear-gradient';
 const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -95,6 +96,20 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
       <Steps labels={labels} currentPosition={0} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>
+          <VStack alignItems="center">
+            <LinearGradient
+              colors={['#C7E9E2', '#0591B1']}
+              style={{borderRadius: 100}}>
+              <Box p={2}>
+                <Image
+                  source={require('../../../resources/NuevoPaciente.png')}
+                  size={'md'}
+                  alt="Logo"
+                  borderRadius={'100'}
+                />
+              </Box>
+            </LinearGradient>
+          </VStack>
           <VStack alignItems={'center'} flex="1" w="85%">
             <Text fontSize={'xl'} bold my={3}>
               Seguimiento

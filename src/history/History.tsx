@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext} from 'react';
 import {FlatList, Box, Text, HStack, Badge, Pressable} from 'native-base';
 import {list_patients} from './Firebase';
 import {LoadContext} from '../support/Context';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DiagnosisHome from '../home/detail_diagnosis/breath/DiagnosisHome';
 import AlertMedics from '../support/AlertMedics';
