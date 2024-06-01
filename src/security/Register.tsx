@@ -8,12 +8,17 @@ import {
   Pressable,
   Text,
   Divider,
+  Image,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'native-base';
 import {AlertMedicsContext, LoadContext} from '../support/Context';
+import {Input as InputKc} from '../components/Input';
+import LinearGradient from 'react-native-linear-gradient';
 import {validationsObjV2} from '../support/Support';
 import AlertMedics from '../support/AlertMedics';
 import {register_firebase} from './Firebase';
+import {Platform} from 'react-native';
 import Loading from '../support/Loading';
 export default function Register({visible = false, setVisible = {}}) {
   const [errors, setErrors] = useState({});
@@ -105,166 +110,165 @@ export default function Register({visible = false, setVisible = {}}) {
   };
   return (
     <>
-      <Modal isOpen={visible} bgColor={'cyan.100'} size={'full'} w={'100%'}>
-        <Loading />
-        <Box w={'100%'}>
-          <AlertMedics />
-        </Box>
-        <Box alignItems="center" mt={10}>
-          <Box w="100%">
-            <VStack alignItems={'center'}>
-              <Text bold fontSize="2xl" mb={10}>
-                Registro de Usuario
-              </Text>
-            </VStack>
-            <ScrollView>
-              <VStack alignItems={'center'}>
-                <FormControl isRequired isInvalid={'email' in errors}>
-                  <FormControl.Label>Correo</FormControl.Label>
-                  <Input
-                    value={formData.email}
-                    onChangeText={email => {
-                      setData({...formData, email});
-                    }}></Input>
-                  {'email' in errors ? (
-                    <FormControl.ErrorMessage>
-                      {errors.email}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    <FormControl.HelperText>
-                      Ingrese su correo
-                    </FormControl.HelperText>
-                  )}
-                </FormControl>
-              </VStack>
+      <Modal isOpen={visible} style={{flex: 1, width: '100%'}}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1, width: '100%'}}>
+          <ScrollView contentContainerStyle={{flexGrow: 1, width: '100%'}}>
+            <LinearGradient
+              colors={['#ffff', '#CFFBFE']}
+              style={{
+                width: '100%',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Loading />
+              <Box w={'100%'}>
+                <AlertMedics />
+              </Box>
+              <Box alignItems="center" mt={10}>
+                <Box mx={5}>
+                  <VStack alignItems="center">
+                    <LinearGradient
+                      colors={['#C7E9E2', '#0591B1']}
+                      style={{borderRadius: 100}}>
+                      <Box p={2}>
+                        <Image
+                          source={require('../resources/Registro.png')}
+                          size={'md'}
+                          alt="Logo"
+                          borderRadius={'100'}
+                        />
+                      </Box>
+                    </LinearGradient>
+                  </VStack>
+                  <VStack alignItems={'center'}>
+                    <Text bold fontSize="2xl" mb={10}>
+                      Registro de Usuario
+                    </Text>
+                  </VStack>
+                  <VStack alignItems={'center'}>
+                    <InputKc
+                      errors={errors}
+                      form={formData}
+                      setForm={setData}
+                      label="Correo"
+                      placeholder="Ingrese su Correo"
+                      name="email"
+                      help="Ingrese su Correo"
+                    />
+                  </VStack>
 
-              <VStack alignItems={'center'}>
-                <FormControl isRequired isInvalid={'password' in errors}>
-                  <FormControl.Label>Password</FormControl.Label>
-                  <Input
-                    value={formData.password}
-                    onChangeText={password => {
-                      setData({...formData, password});
-                    }}
-                    type="password"></Input>
-                  {'password' in errors ? (
-                    <FormControl.ErrorMessage>
-                      {errors.password}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    <FormControl.HelperText>
-                      Ingrese su password
-                    </FormControl.HelperText>
-                  )}
-                </FormControl>
-              </VStack>
-              <VStack alignItems={'center'}>
-                <FormControl isRequired isInvalid={'repeatPassword' in errors}>
-                  <FormControl.Label>Repita su password</FormControl.Label>
-                  <Input
-                    value={formData.repeatPassword}
-                    type="password"
-                    onChangeText={repeatPassword => {
-                      setData({...formData, repeatPassword});
-                    }}></Input>
-                  {'repeatPassword' in errors ? (
-                    <FormControl.ErrorMessage>
-                      {errors.repeatPassword}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    <FormControl.HelperText>
-                      Repita su password
-                    </FormControl.HelperText>
-                  )}
-                </FormControl>
-              </VStack>
-              <VStack alignItems={'center'}>
-                <Pressable
-                  mb={3}
-                  w={'55%'}
-                  onPress={() => {
-                    register(formData);
-                  }}>
-                  {({isHovered, isFocused, isPressed}) => {
-                    return (
-                      <Box
-                        bg={
-                          isPressed
-                            ? 'primary.900'
-                            : isHovered
-                            ? 'primary.900'
-                            : 'primary.600'
-                        }
-                        style={{
-                          transform: [
-                            {
-                              scale: isPressed ? 0.96 : 1,
-                            },
-                          ],
-                        }}
-                        p="2"
-                        mt="10"
-                        rounded="8"
-                        shadow={3}
-                        borderWidth="1"
-                        borderColor="coolGray.300">
-                        <Text
-                          color="white"
-                          fontWeight="bold"
-                          fontSize="lg"
-                          textAlign={'center'}>
-                          Registrarse
-                        </Text>
-                      </Box>
-                    );
-                  }}
-                </Pressable>
-                <Divider />
-                <Pressable
-                  mb={3}
-                  w={'50%'}
-                  onPress={() => {
-                    setVisible(!visible);
-                  }}>
-                  {({isHovered, isFocused, isPressed}) => {
-                    return (
-                      <Box
-                        bg={
-                          isPressed
-                            ? 'error.900'
-                            : isHovered
-                            ? 'error.900'
-                            : 'error.600'
-                        }
-                        style={{
-                          transform: [
-                            {
-                              scale: isPressed ? 0.96 : 1,
-                            },
-                          ],
-                        }}
-                        p="2"
-                        mt="5"
-                        rounded="8"
-                        shadow={3}
-                        borderWidth="1"
-                        borderColor="coolGray.300">
-                        <Text
-                          color="white"
-                          fontWeight="bold"
-                          fontSize="lg"
-                          textAlign={'center'}>
-                          Regresar
-                        </Text>
-                      </Box>
-                    );
-                  }}
-                </Pressable>
-              </VStack>
-            </ScrollView>
-          </Box>
-        </Box>
-        <Modal.Body></Modal.Body>
+                  <VStack alignItems={'center'}>
+                    <InputKc
+                      errors={errors}
+                      form={formData}
+                      setForm={setData}
+                      label="Contraseña"
+                      placeholder="Ingrese su Contraseña"
+                      name={'password'}
+                      help="Ingrese su Contraseña"
+                      type="password"
+                    />
+                  </VStack>
+                  <VStack alignItems={'center'}>
+                    <InputKc
+                      errors={errors}
+                      form={formData}
+                      setForm={setData}
+                      label="Repita su Contraseña"
+                      placeholder="Repita su Contraseña"
+                      name={'repeatPassword'}
+                      help="Repita su Contraseña"
+                      type="password"
+                    />
+                  </VStack>
+                  <VStack alignItems={'center'}>
+                    <Pressable
+                      m={3}
+                      w={'65%'}
+                      onPress={() => {
+                        register(formData);
+                      }}>
+                      {({isHovered, isFocused, isPressed}) => {
+                        return (
+                          <Box
+                            style={{
+                              transform: [
+                                {
+                                  scale: isPressed ? 0.9 : 1,
+                                },
+                              ],
+                            }}
+                            shadow={'5'}>
+                            <LinearGradient
+                              colors={['#ffff', '#0384C8']}
+                              style={{flex: 1, borderRadius: 10}}>
+                              <Text
+                                m={'3'}
+                                color="white"
+                                fontWeight="bold"
+                                fontSize="lg"
+                                textAlign="center"
+                                style={{
+                                  textShadowColor: '#000',
+                                  textShadowRadius: 1,
+                                  textShadowOffset: {width: 1, height: 1},
+                                }}>
+                                Registrarse
+                              </Text>
+                            </LinearGradient>
+                          </Box>
+                        );
+                      }}
+                    </Pressable>
+                    <Divider />
+                    <Pressable
+                      mt={3}
+                      w={'50%'}
+                      onPress={() => {
+                        setVisible(!visible);
+                      }}>
+                      {({isHovered, isFocused, isPressed}) => {
+                        return (
+                          <Box
+                            style={{
+                              transform: [
+                                {
+                                  scale: isPressed ? 0.9 : 1,
+                                },
+                              ],
+                            }}
+                            shadow={'5'}>
+                            <LinearGradient
+                              colors={['#ffff', '#DC2626']}
+                              style={{flex: 1, borderRadius: 10}}>
+                              <Text
+                                m={'3'}
+                                color="white"
+                                fontWeight="bold"
+                                fontSize="lg"
+                                textAlign="center"
+                                style={{
+                                  textShadowColor: '#000',
+                                  textShadowRadius: 1,
+                                  textShadowOffset: {width: 1, height: 1},
+                                }}>
+                                Regresar
+                              </Text>
+                            </LinearGradient>
+                          </Box>
+                        );
+                      }}
+                    </Pressable>
+                  </VStack>
+                </Box>
+              </Box>
+              <Modal.Body></Modal.Body>
+            </LinearGradient>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </Modal>
     </>
   );

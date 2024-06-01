@@ -4,7 +4,7 @@ const list_patients = async () => {
   const firestore = firebase.firestore();
   const objects = await firestore
     .collection('patient')
-    .where('Cerrado' , '==', false)
+    .where('Cerrado', '==', false)
     .get();
   return objects;
 };

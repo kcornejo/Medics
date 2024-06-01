@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AlertMedics from '../support/AlertMedics';
 import {UserContext} from '../support/Context';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Home = ({setShowIndex}) => {
   const [user, setUser] = useContext(UserContext);
@@ -11,7 +12,7 @@ const Home = ({setShowIndex}) => {
     <>
       <Box bgColor={'info.50'} w={'100%'} flex={1}>
         <AlertMedics />
-        <>
+        <LinearGradient colors={['#ffffff', '#b3e5fc']}>
           <Box mx={5} mt={10}>
             <VStack h={'100%'} space={'2%'}>
               <Box w={'100%'} h={'5%'} alignItems={'flex-end'}>
@@ -228,7 +229,7 @@ const Home = ({setShowIndex}) => {
               </HStack>
             </VStack>
           </Box>
-        </>
+        </LinearGradient>
       </Box>
     </>
   );
