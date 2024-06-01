@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react';
-import {VStack, Pressable, Box, Text, ScrollView} from 'native-base';
+import {VStack, Box, Text, ScrollView, Image} from 'native-base';
 import {Input} from '../components/Input';
 import Steps from './Steps';
 import {validationForm} from '../support/Support';
 import {AlertMedicsContext} from '../support/Context';
 import Button from '../components/Button';
-import FlatListInput from '../components/FlatListInput';
+import LinearGradient from 'react-native-linear-gradient';
 import {BedUsed} from './Firebase';
 const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
@@ -43,7 +43,7 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
       setVentana(3);
     };
     BedUsed(parseInt(formData.NoCama)).then(response => {
-      const bedUsed = response.size >= 0 ? true : false;
+      const bedUsed = response.size > 0 ? true : false;
       if (!bedUsed) {
         validationForm(
           formData,
@@ -66,74 +66,94 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   };
   const labels = ['Información General', 'Información Específica'];
   return (
-    <Box safeAreaTop mt={5}>
-      <Steps labels={labels} currentPosition={0} />
-      <ScrollView w={'100%'} alignContent={'center'}>
-        <Box alignItems={'center'}>
-          <VStack alignItems={'center'} flex="1" w="85%">
-            <Text fontSize={'xl'} bold my={3}>
-              Nuevo Paciente
-            </Text>
-            <Input
-              placeholder="Fecha"
-              type="date"
-              label="Fecha"
-              name="Fecha"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
-            <Input
-              placeholder="Número de Cama"
-              label="Número de Cama"
-              keyboardType="numeric"
-              name="NoCama"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
-            <Input
-              placeholder="Número de Registro"
-              label="Número de Registro"
-              keyboardType="numeric"
-              name="NoRegistro"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
-            <Input
-              placeholder="Nombre del Paciente"
-              label="Nombre del Paciente"
-              name="Nombre"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
-            <Button
-              color="emerald.300"
-              boldText={false}
-              w={'100%'}
-              text={'Continuar'}
-              colorClick={'emerald.600'}
-              onPress={() => {
-                nextStep(formData);
-              }}
-            />
-            <Button
-              color="info.600"
-              boldText={false}
-              w={'100%'}
-              mb={100}
-              text={'Inicio'}
-              colorClick={'info.800'}
-              onPress={() => {
-                setShowIndex(1);
-              }}
-            />
-          </VStack>
-        </Box>
-      </ScrollView>
-    </Box>
+    <LinearGradient
+      colors={['#ffffff', '#b3e5fc']}
+      style={{
+        flex: 1,
+      }}>
+      <Box safeAreaTop mt={5}>
+        <Steps labels={labels} currentPosition={0} />
+        <ScrollView w={'100%'} alignContent={'center'}>
+          <Box alignItems={'center'}>
+            <VStack alignItems="center">
+              <LinearGradient
+                colors={['#C7E9E2', '#0591B1']}
+                style={{borderRadius: 100}}>
+                <Box p={2}>
+                  <Image
+                    source={require('../resources/Registro.png')}
+                    size={'md'}
+                    alt="Logo"
+                    borderRadius={'100'}
+                  />
+                </Box>
+              </LinearGradient>
+            </VStack>
+            <VStack alignItems={'center'} flex="1" w="85%">
+              <Text fontSize={'xl'} bold my={3}>
+                Nuevo Paciente
+              </Text>
+              <Input
+                placeholder="Fecha"
+                type="date"
+                label="Fecha"
+                name="Fecha"
+                errors={error}
+                form={formData}
+                setForm={setFormData}
+              />
+              <Input
+                placeholder="Número de Cama"
+                label="Número de Cama"
+                keyboardType="numeric"
+                name="NoCama"
+                errors={error}
+                form={formData}
+                setForm={setFormData}
+              />
+              <Input
+                placeholder="Número de Registro"
+                label="Número de Registro"
+                keyboardType="numeric"
+                name="NoRegistro"
+                errors={error}
+                form={formData}
+                setForm={setFormData}
+              />
+              <Input
+                placeholder="Nombre del Paciente"
+                label="Nombre del Paciente"
+                name="Nombre"
+                errors={error}
+                form={formData}
+                setForm={setFormData}
+              />
+              <Button
+                color="emerald.300"
+                boldText={false}
+                w={'100%'}
+                text={'Continuar'}
+                colorClick={'emerald.600'}
+                onPress={() => {
+                  nextStep(formData);
+                }}
+              />
+              <Button
+                color="info.600"
+                boldText={false}
+                w={'100%'}
+                mb={100}
+                text={'Inicio'}
+                colorClick={'info.800'}
+                onPress={() => {
+                  setShowIndex(1);
+                }}
+              />
+            </VStack>
+          </Box>
+        </ScrollView>
+      </Box>
+    </LinearGradient>
   );
 };
 

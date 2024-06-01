@@ -210,6 +210,7 @@ export const Index: FC<any> = ({setShowIndex}) => {
                   {div.map(function (object, i) {
                     return (
                       <Box
+                        my={'1'}
                         w={'100%'}
                         borderRadius={'2xl'}
                         bg={

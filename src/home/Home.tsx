@@ -133,7 +133,12 @@ const Home = ({setShowIndex}) => {
                         shadow={3}
                         borderWidth="1"
                         borderColor="coolGray.300">
-                        <FontAwesome5 size={80} name={'fan'} solid />
+                        <FontAwesome5
+                          color="black"
+                          size={80}
+                          name={'fan'}
+                          solid
+                        />
                         <Text fontSize="md" mt={5} textAlign="center">
                           Neubolización
                         </Text>
