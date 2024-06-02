@@ -1,4 +1,12 @@
-import {HStack, VStack, Box, Pressable, Image, Text, Modal} from 'native-base';
+import {
+  HStack,
+  VStack,
+  Box,
+  Pressable,
+  Image,
+  Text,
+  ScrollView,
+} from 'native-base';
 import React, {FC, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
@@ -8,6 +16,7 @@ import {list_patients} from '../history/Firebase';
 import {BedUsed} from '../home/Firebase';
 import LinearGradient from 'react-native-linear-gradient';
 import DetailBed from './DetailBed';
+import {flexbox} from 'native-base/lib/typescript/theme/styled-system';
 const PrintButton: FC = ({
   bed_number,
   listBed,
@@ -121,135 +130,143 @@ export const Index: FC<any> = ({setShowIndex}) => {
           setPatient={setPatient}
           setBeds={setBeds}
         />
-        <VStack h={'100%'} safeAreaTop mx={'5%'}>
-          <Box w={'100%'} alignItems={'center'}>
-            <InputBase
-              my={'10%'}
-              w={'92%'}
-              style={{
-                height: 40,
-              }}
-              borderRadius={10}
-              placeholder="Ingrese paciente a buscar"
-              onChangeText={value => {
-                setBuscador(value);
-                if (value !== '') {
-                  setCargando(true);
-                  buscar(value);
-                } else {
-                  setCargando(false);
-                }
-              }}
-            />
-          </Box>
-          {buscador === '' && cargando === false ? (
-            <>
-              <HStack space={'3.33%'} w={'100%'} h={'13%'}>
-                <RowButtons
-                  num_min={1}
-                  num_max={3}
-                  beds={beds}
-                  setModal={setModal}
-                  setPatient={setPatient}
-                  setCargando={setCargandoDetail}
-                />
-              </HStack>
-              <HStack space={'3.33%'} w={'100%'} h={'13%'}>
-                <RowButtons
-                  num_min={4}
-                  num_max={6}
-                  beds={beds}
-                  setModal={setModal}
-                  setPatient={setPatient}
-                  setCargando={setCargandoDetail}
-                />
-              </HStack>
-              <HStack space={'3.33%'} w={'100%'} h={'13%'}>
-                <RowButtons
-                  num_min={7}
-                  num_max={9}
-                  beds={beds}
-                  setModal={setModal}
-                  setPatient={setPatient}
-                  setCargando={setCargandoDetail}
-                />
-              </HStack>
-              <HStack space={'3.33%'} w={'100%'} h={'13%'}>
-                <RowButtons
-                  num_min={10}
-                  num_max={12}
-                  beds={beds}
-                  setModal={setModal}
-                  setPatient={setPatient}
-                  setCargando={setCargandoDetail}
-                />
-              </HStack>
-              <HStack space={'3.33%'} w={'100%'} h={'13%'}>
-                <RowButtons
-                  num_min={13}
-                  num_max={15}
-                  beds={beds}
-                  setModal={setModal}
-                  setPatient={setPatient}
-                  setCargando={setCargandoDetail}
-                />
-              </HStack>
-            </>
-          ) : (
-            <>
-              {cargando ? (
-                <Box w={'100%'} alignItems={'center'}>
-                  <Image
-                    source={require('../resources/loading.gif')}
-                    alt="Cargando..."
-                    size="2xl"
-                  />
-                </Box>
-              ) : (
-                <>
-                  {div.map(function (object, i) {
-                    return (
-                      <Box
-                        my={'1'}
-                        w={'100%'}
-                        borderRadius={'2xl'}
-                        bg={
-                          object.Genero == 'Femenino' ? 'red.100' : 'blue.100'
-                        }
-                        key={i}
-                        p={2}>
-                        <Text bold fontSize={'xl'}>
-                          {object.Nombre}
-                        </Text>
-                        <Text>
-                          <Text bold>Edad: </Text>
-                          {object.Edad}
-                        </Text>
-                        <Text>
-                          <Text bold>Diagnostico: </Text>
-                          {object.Diagnostico}
-                        </Text>
+        <Box h={'100%'} mx={'5%'}>
+          <VStack safeAreaTop>
+            <Box w={'100%'} h={'20%'} alignItems={'center'}>
+              <InputBase
+                my={'10%'}
+                w={'92%'}
+                style={{
+                  height: 40,
+                }}
+                borderRadius={10}
+                placeholder="Ingrese paciente a buscar"
+                onChangeText={value => {
+                  setBuscador(value);
+                  if (value !== '') {
+                    setCargando(true);
+                    buscar(value);
+                  } else {
+                    setCargando(false);
+                  }
+                }}
+              />
+            </Box>
+            <Box h="65%">
+              <ScrollView w={'100%'} alignContent={'center'}>
+                {buscador === '' && cargando === false ? (
+                  <Box>
+                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
+                      <RowButtons
+                        num_min={1}
+                        num_max={3}
+                        beds={beds}
+                        setModal={setModal}
+                        setPatient={setPatient}
+                        setCargando={setCargandoDetail}
+                      />
+                    </HStack>
+                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
+                      <RowButtons
+                        num_min={4}
+                        num_max={6}
+                        beds={beds}
+                        setModal={setModal}
+                        setPatient={setPatient}
+                        setCargando={setCargandoDetail}
+                      />
+                    </HStack>
+                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
+                      <RowButtons
+                        num_min={7}
+                        num_max={9}
+                        beds={beds}
+                        setModal={setModal}
+                        setPatient={setPatient}
+                        setCargando={setCargandoDetail}
+                      />
+                    </HStack>
+                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
+                      <RowButtons
+                        num_min={10}
+                        num_max={12}
+                        beds={beds}
+                        setModal={setModal}
+                        setPatient={setPatient}
+                        setCargando={setCargandoDetail}
+                      />
+                    </HStack>
+                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
+                      <RowButtons
+                        num_min={13}
+                        num_max={15}
+                        beds={beds}
+                        setModal={setModal}
+                        setPatient={setPatient}
+                        setCargando={setCargandoDetail}
+                      />
+                    </HStack>
+                  </Box>
+                ) : (
+                  <>
+                    {cargando ? (
+                      <Box w={'100%'} alignItems={'center'}>
+                        <Image
+                          source={require('../resources/loading.gif')}
+                          alt="Cargando..."
+                          size="2xl"
+                        />
                       </Box>
-                    );
-                  })}
-                </>
-              )}
-            </>
-          )}
-          <Box w={'97%'}>
-            <Button
-              color="info.600"
-              boldText={false}
-              w={'100%'}
-              mb={100}
-              text={'Inicio'}
-              colorClick={'info.800'}
-              onPress={() => {
-                setShowIndex(1);
-              }}
-            />
-          </Box>
-        </VStack>
+                    ) : (
+                      <>
+                        {div.map(function (object, i) {
+                          return (
+                            <Box
+                              my={'1'}
+                              w={'100%'}
+                              borderRadius={'2xl'}
+                              bg={
+                                object.Genero == 'Femenino'
+                                  ? 'red.100'
+                                  : 'blue.100'
+                              }
+                              key={i}
+                              p={2}>
+                              <Text bold fontSize={'xl'}>
+                                {object.Nombre}
+                              </Text>
+                              <Text>
+                                <Text bold>Edad: </Text>
+                                {object.Edad}
+                              </Text>
+                              <Text>
+                                <Text bold>Diagnostico: </Text>
+                                {object.Diagnostico}
+                              </Text>
+                            </Box>
+                          );
+                        })}
+                      </>
+                    )}
+                  </>
+                )}
+              </ScrollView>
+            </Box>
+            <Box h={'15%'} justifyContent={'flex-end'}>
+              <Button
+                color="info.600"
+                boldText={false}
+                w={'100%'}
+                mb={5}
+                text={'Inicio'}
+                colorClick={'info.800'}
+                onPress={() => {
+                  setShowIndex(1);
+                }}
+              />
+            </Box>
+          </VStack>
+        </Box>
       </LinearGradient>
     </>
   );

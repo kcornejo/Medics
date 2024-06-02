@@ -127,8 +127,8 @@ export default function Register({visible = false, setVisible = {}}) {
               <Box w={'100%'}>
                 <AlertMedics />
               </Box>
-              <Box alignItems="center" mt={10}>
-                <Box mx={5}>
+              <Box alignItems="center" mt={10} w={'100%'}>
+                <Box w={'80%'}>
                   <VStack alignItems="center">
                     <LinearGradient
                       colors={['#C7E9E2', '#0591B1']}
