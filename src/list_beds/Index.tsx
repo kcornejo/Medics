@@ -1,114 +1,18 @@
-import {
-  HStack,
-  VStack,
-  Box,
-  Pressable,
-  Image,
-  Text,
-  ScrollView,
-} from 'native-base';
-import React, {FC, useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {VStack, Box, Image, Text, ScrollView} from 'native-base';
+import React, {FC, useState} from 'react';
 import Button from '../components/Button';
 import {Input as InputBase} from 'native-base';
 import {searchPatient} from './Firebase';
-import {list_patients} from '../history/Firebase';
-import {BedUsed} from '../home/Firebase';
 import LinearGradient from 'react-native-linear-gradient';
 import DetailBed from './DetailBed';
-const PrintButton: FC = ({
-  bed_number,
-  listBed,
-  setModal,
-  setPatient,
-  setCargando,
-}) => {
-  return (
-    <Pressable
-      w={'30%'}
-      mr={'3.33%'}
-      mb={'5%'}
-      onPress={() => {
-        if (listBed.includes(bed_number)) {
-          setModal(true);
-          setCargando(true);
-          BedUsed(bed_number).then(response => {
-            response.forEach(item => {
-              setPatient({id: item.id, ...item.data()});
-            });
-            setCargando(false);
-          });
-        }
-      }}>
-      {({isHovered, isFocused, isPressed}) => {
-        return (
-          <Box
-            style={{
-              transform: [
-                {
-                  scale: isPressed ? 0.9 : 1,
-                },
-              ],
-            }}
-            bg={listBed.includes(bed_number) ? 'red.300' : 'green.300'}
-            borderRadius={10}
-            h={'100%'}
-            alignItems={'center'}
-            rounded="3xl"
-            justifyContent={'center'}
-            shadow={3}
-            borderColor="coolGray.300">
-            <Icon size={30} color="grey">
-              {bed_number}
-            </Icon>
-          </Box>
-        );
-      }}
-    </Pressable>
-  );
-};
-const RowButtons = ({
-  num_min,
-  num_max,
-  beds,
-  setModal,
-  setPatient,
-  setCargando,
-}) => {
-  var row = [];
-  for (var i = num_min; i <= num_max; i++) {
-    row.push(
-      <PrintButton
-        bed_number={i}
-        listBed={beds}
-        key={'row_' + i}
-        setModal={setModal}
-        setPatient={setPatient}
-        setCargando={setCargando}
-      />,
-    );
-  }
-  return row;
-};
+import {ListBedsSupport} from './ListBedsSupport';
 export const Index: FC<any> = ({setShowIndex}) => {
   const [buscador, setBuscador] = useState('');
   const [cargando, setCargando] = useState(false);
   const [cargandoDetail, setCargandoDetail] = useState(false);
   const [div, setDiv] = useState<any[]>([]);
-  const [beds, setBeds] = useState<any[]>([]);
   const [modal, setModal] = useState(false);
   const [patient, setPatient] = useState({});
-  useEffect(() => {
-    setCargando(true);
-    list_patients().then(response => {
-      var beds_temp = [];
-      response.forEach(item => {
-        beds_temp.push(item.data().NoCama);
-      });
-      setBeds(beds_temp);
-      setCargando(false);
-    });
-  }, [patient]);
   const buscar = async (texto: string) => {
     const retorno = await searchPatient(texto);
     setCargando(false);
@@ -117,6 +21,9 @@ export const Index: FC<any> = ({setShowIndex}) => {
       div_fun.push(items.data());
     });
     setDiv(div_fun);
+  };
+  const functionClick = function () {
+    setModal(true);
   };
   return (
     <>
@@ -127,7 +34,6 @@ export const Index: FC<any> = ({setShowIndex}) => {
           patient={patient}
           cargandoDetail={cargandoDetail}
           setPatient={setPatient}
-          setBeds={setBeds}
         />
         <Box h={'100%'} mx={'5%'}>
           <VStack safeAreaTop>
@@ -154,58 +60,9 @@ export const Index: FC<any> = ({setShowIndex}) => {
             <Box h="65%">
               <ScrollView w={'100%'} alignContent={'center'}>
                 {buscador === '' && cargando === false ? (
-                  <Box>
-                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
-                      <RowButtons
-                        num_min={1}
-                        num_max={3}
-                        beds={beds}
-                        setModal={setModal}
-                        setPatient={setPatient}
-                        setCargando={setCargandoDetail}
-                      />
-                    </HStack>
-                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
-                      <RowButtons
-                        num_min={4}
-                        num_max={6}
-                        beds={beds}
-                        setModal={setModal}
-                        setPatient={setPatient}
-                        setCargando={setCargandoDetail}
-                      />
-                    </HStack>
-                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
-                      <RowButtons
-                        num_min={7}
-                        num_max={9}
-                        beds={beds}
-                        setModal={setModal}
-                        setPatient={setPatient}
-                        setCargando={setCargandoDetail}
-                      />
-                    </HStack>
-                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
-                      <RowButtons
-                        num_min={10}
-                        num_max={12}
-                        beds={beds}
-                        setModal={setModal}
-                        setPatient={setPatient}
-                        setCargando={setCargandoDetail}
-                      />
-                    </HStack>
-                    <HStack space={'3.33%'} w={'100%'} h={'20'}>
-                      <RowButtons
-                        num_min={13}
-                        num_max={15}
-                        beds={beds}
-                        setModal={setModal}
-                        setPatient={setPatient}
-                        setCargando={setCargandoDetail}
-                      />
-                    </HStack>
-                  </Box>
+                  <ListBedsSupport
+                    setPatient={setPatient}
+                    functionClick={functionClick}></ListBedsSupport>
                 ) : (
                   <>
                     {cargando ? (

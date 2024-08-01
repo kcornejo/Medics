@@ -14,6 +14,24 @@ const saveFeedback = async (formData, idPerson) => {
     .collection('feedback')
     .add(formData);
 };
+const saveFeedbackMedicine = async (formData, idPerson) => {
+  const firestore = firebase.firestore();
+  await firestore
+    .collection('patient')
+    .doc(idPerson)
+    .collection('feedback_medicine')
+    .add(formData);
+};
+const getLastFeedbackMedicine = async (idPerson: string) => {
+  const firestore = firebase.firestore();
+  return await firestore
+    .collection('patient')
+    .doc(idPerson)
+    .collection('feedback_medicine')
+    .orderBy('FechaSeguimiento', 'desc')
+    .limit(1)
+    .get();
+};
 const getLastFeedback = async (idPerson: string) => {
   const firestore = firebase.firestore();
   return await firestore
@@ -39,4 +57,12 @@ const getListBed = async (cerrado: boolean) => {
     .where('Cerrado', '==', cerrado)
     .get();
 };
-export {savePerson, saveFeedback, getLastFeedback, BedUsed, getListBed};
+export {
+  savePerson,
+  saveFeedback,
+  saveFeedbackMedicine,
+  getLastFeedbackMedicine,
+  getLastFeedback,
+  BedUsed,
+  getListBed,
+};

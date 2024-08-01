@@ -62,7 +62,7 @@ const RowButtons = ({num_min, num_max, beds, setPatient, functionClick}) => {
   }
   return row;
 };
-export const ListBedsSupport: FC<any> = (setPatient, functionClick) => {
+export const ListBedsSupport: FC<any> = ({setPatient, functionClick}) => {
   const [beds, setBeds] = useState<any[]>([]);
   const [load, setLoad] = useContext(LoadContext);
   useEffect(() => {

@@ -11,22 +11,26 @@ import {
   MinusIcon,
 } from 'native-base';
 import {Input} from '../../../components/Input';
-import Steps from '../../Steps';
 import {AlertMedicsContext, LoadContext} from '../../../support/Context';
 import {LogBox} from 'react-native';
 import {validationForm} from '../../../support/Support';
-import {saveFeedback} from '../../Firebase';
+import {saveFeedbackMedicine, getLastFeedbackMedicine} from '../../Firebase';
 import Medicaments from './Medicaments';
 import Button from '../../../components/Button';
-const StepFour = ({
-  setVentana,
-  setFormData,
-  formData,
-  idPerson,
-  setShowIndex,
-}) => {
+const StepFour = ({idPerson, setShowIndex}) => {
+  const [load, setLoad] = useContext(LoadContext);
   const [contadorMed, setContadorMed] = useState(1);
+  const [alerts, setAlerts] = useContext(AlertMedicsContext);
+  const [error, setError] = useState({});
+  const [formData, setFormData] = useState({});
   useEffect(() => {
+    setLoad(true);
+    getLastFeedbackMedicine(idPerson).then(data => {
+      data.forEach(obj => {
+        setFormData(obj.data());
+        setLoad(false);
+      });
+    });
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     if (
       formData['Medicamentos'] !== undefined &&
@@ -41,11 +45,8 @@ const StepFour = ({
     'Signos Vitales',
     'Tratamiento',
   ];
-  const [alerts, setAlerts] = useContext(AlertMedicsContext);
-  const [load, setLoad] = useContext(AlertMedicsContext);
-  const [error, setError] = useState({});
 
-  const nextStep = () => {
+  const nextStep = formData => {
     let validation = [
       {
         isRequired: true,
@@ -74,7 +75,7 @@ const StepFour = ({
       );
     }
     const success = async () => {
-      //setLoad(true);
+      setLoad(true);
       let formDataSave = formData;
       formDataSave['FechaSeguimiento'] = new Date();
       let medicamentos = [];
@@ -90,7 +91,8 @@ const StepFour = ({
       }
       formDataSave['Medicamentos'] = medicamentos;
       try {
-        await saveFeedback(formDataSave, idPerson);
+        await saveFeedbackMedicine(formDataSave, idPerson);
+        setLoad(false);
         setAlerts({
           show: true,
           type: 'info',
@@ -100,7 +102,7 @@ const StepFour = ({
       } catch (e) {
         console.log(e.message);
       }
-      //setLoad(false);
+
       setShowIndex(1);
     };
     validationForm(
@@ -113,14 +115,8 @@ const StepFour = ({
       success,
     );
   };
-  const cambioVentana = step => {
-    if (step < 3) {
-      setVentana(step + 1);
-    }
-  };
   return (
     <Box safeAreaTop mt={5}>
-      <Steps labels={labels} currentPosition={3} onPress={cambioVentana} />
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>
           <VStack alignItems={'center'} flex="1" w="85%">
@@ -235,7 +231,7 @@ const StepFour = ({
               text={'Regresar'}
               colorClick={'info.800'}
               onPress={() => {
-                setVentana(3);
+                setShowIndex(true);
               }}
             />
           </VStack>
