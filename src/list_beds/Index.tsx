@@ -16,7 +16,6 @@ import {list_patients} from '../history/Firebase';
 import {BedUsed} from '../home/Firebase';
 import LinearGradient from 'react-native-linear-gradient';
 import DetailBed from './DetailBed';
-import {flexbox} from 'native-base/lib/typescript/theme/styled-system';
 const PrintButton: FC = ({
   bed_number,
   listBed,

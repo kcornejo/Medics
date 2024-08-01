@@ -5,6 +5,7 @@ import DiagnosisHome from '../home/detail_diagnosis/breath/DiagnosisHome';
 import {closedBed} from './Firebase';
 import {Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import AlertMedics from '../support/AlertMedics';
 const DetailBed = ({cargandoDetail, patient, setModal, modal, setPatient}) => {
   const [follow, setFollow] = useState(false);
   const closed_bed = async (id: string) => {
@@ -46,7 +47,8 @@ const DetailBed = ({cargandoDetail, patient, setModal, modal, setPatient}) => {
                   }}
                 />
               ) : (
-                <>
+                <Box flex={1} bg="white">
+                  <AlertMedics />
                   <Box
                     safeAreaTop
                     mt={'10%'}
@@ -105,7 +107,7 @@ const DetailBed = ({cargandoDetail, patient, setModal, modal, setPatient}) => {
                       setPatient({});
                     }}
                   />
-                </>
+                </Box>
               )}
             </Box>
           </>

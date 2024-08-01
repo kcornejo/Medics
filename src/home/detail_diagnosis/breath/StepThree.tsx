@@ -1,21 +1,62 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {Box, VStack, Text, Pressable, ScrollView} from 'native-base';
 import {Input} from '../../../components/Input';
 import Steps from '../../Steps';
 import Button from '../../../components/Button';
-const StepThree = ({setVentana, setFormData, formData}) => {
+import {saveFeedback} from '../../Firebase';
+import {AlertMedicsContext, LoadContext} from '../../../support/Context';
+import {validationForm} from '../../../support/Support';
+const StepThree = ({
+  setVentana,
+  setFormData,
+  formData,
+  idPerson,
+  setShowIndex,
+}) => {
   const labels = [
     'Parametros Ventilatorios',
     'Gases Arteriales',
     'Signos Vitales',
-    'Tratamiento',
   ];
   const [error, setError] = useState({});
+  const [alerts, setAlerts] = useContext(AlertMedicsContext);
+  const [load, setLoad] = useContext(LoadContext);
   const scrollRef = useRef(null);
   const cambioVentana = step => {
     if (step < 2) {
       setVentana(step + 1);
     }
+  };
+  const nextStep = () => {
+    let validation = [];
+    const success = async () => {
+      setLoad(true);
+      let formDataSave = formData;
+      formDataSave['FechaSeguimiento'] = new Date();
+      try {
+        await saveFeedback(formDataSave, idPerson);
+        setLoad(false);
+        setAlerts({
+          show: true,
+          type: 'info',
+          title: 'Exito',
+          message: 'Seguimiento creado correctamente',
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+
+      setShowIndex(1);
+    };
+    validationForm(
+      formData,
+      setError,
+      setAlerts,
+      error,
+      alerts,
+      validation,
+      success,
+    );
   };
   return (
     <Box safeAreaTop mt={5}>
@@ -90,10 +131,10 @@ const StepThree = ({setVentana, setFormData, formData}) => {
               color="emerald.300"
               boldText={false}
               w={'100%'}
-              text={'Continuar'}
+              text={'Guardar'}
               colorClick={'emerald.600'}
               onPress={() => {
-                setVentana(4);
+                nextStep(formData);
               }}
             />
             <Button

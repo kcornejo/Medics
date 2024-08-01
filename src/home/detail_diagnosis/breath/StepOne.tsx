@@ -16,7 +16,6 @@ const StepOne = ({setVentana, setFormData, formData, setShowIndex}) => {
     'Parametros Ventilatorios',
     'Gases Arteriales',
     'Signos Vitales',
-    'Tratamiento',
   ];
   const [error, setError] = useState({});
 

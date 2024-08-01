@@ -5,7 +5,7 @@ const Button = ({
   text,
   color,
   colorClick,
-  icon,
+  icon = '',
   w,
   mb = 0,
   mt = 0,

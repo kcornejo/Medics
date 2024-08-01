@@ -67,7 +67,6 @@ const StepTwo = ({setVentana, setFormData, formData}) => {
     'Parametros Ventilatorios',
     'Gases Arteriales',
     'Signos Vitales',
-    'Tratamiento',
   ];
   const [error, setError] = useState({});
   const cambioVentana = step => {
