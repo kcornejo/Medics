@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   VStack,
   Box,
@@ -10,14 +10,16 @@ import {
 import {Input} from '../components/Input';
 import Steps from './Steps';
 import {validationForm} from '../support/Support';
-import {AlertMedicsContext} from '../support/Context';
+import {AlertMedicsContext, LoadContext} from '../support/Context';
 import Button from '../components/Button';
-import {Platform} from 'react-native';
+import {LogBox, Platform} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {BedUsed} from './Firebase';
+import {BedUsed, getListBed} from './Firebase';
+import {OptionsSelect} from '../support/Interfaces';
 const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [error, setError] = useState({});
+  const [beds, setBeds] = useState<OptionsSelect[]>([]);
   const nextStep = formData => {
     const validation = [
       {
@@ -73,6 +75,26 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
     });
   };
   const labels = ['Información General', 'Información Específica'];
+  const [load, setLoad] = useContext(LoadContext);
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    setLoad(true);
+    getListBed(false)
+      .then(function (list) {
+        let bedList: OptionsSelect[] = [];
+        for (let i = 1; i <= 12; i++) {
+          bedList.push({value: i, label: `Cama ${i}`});
+        }
+        list.forEach(document => {
+          const data = document.data();
+          bedList = bedList.filter(bed => bed.value != data.NoCama);
+        });
+        setBeds(bedList);
+      })
+      .finally(function () {
+        setLoad(false);
+      });
+  }, [1]);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -120,6 +142,8 @@ const NewPerson = ({setVentana, formData, setFormData, setShowIndex}) => {
                   name="NoCama"
                   errors={error}
                   form={formData}
+                  type="select"
+                  options={beds}
                   setForm={setFormData}
                 />
                 <Input

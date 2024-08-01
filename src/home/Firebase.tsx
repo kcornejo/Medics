@@ -32,4 +32,11 @@ const BedUsed = async (bed: number) => {
     .where('Cerrado', '==', false)
     .get();
 };
-export {savePerson, saveFeedback, getLastFeedback, BedUsed};
+const getListBed = async (cerrado: boolean) => {
+  const firestore = firebase.firestore();
+  return await firestore
+    .collection('patient')
+    .where('Cerrado', '==', cerrado)
+    .get();
+};
+export {savePerson, saveFeedback, getLastFeedback, BedUsed, getListBed};

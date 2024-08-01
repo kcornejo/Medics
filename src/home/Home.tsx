@@ -140,7 +140,7 @@ const Home = ({setShowIndex}) => {
                           solid
                         />
                         <Text fontSize="md" mt={5} textAlign="center">
-                          Neubolización
+                          Nebulización
                         </Text>
                       </Box>
                     );
