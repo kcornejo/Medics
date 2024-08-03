@@ -14,6 +14,8 @@ const Medicaments = ({number = 0, error, formData, setFormData}) => {
             ...formData,
             [`Medicamento ${i + 1}`]: formData['Medicamentos'][i].Medicamento,
             [`Horario ${i + 1}`]: formData['Medicamentos'][i].Horario,
+            [`TipoNeubolizacion ${i + 1}`]:
+              formData['TipoNeubolizacion'][i].Dosis,
           };
         });
       }

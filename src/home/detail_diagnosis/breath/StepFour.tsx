@@ -24,20 +24,27 @@ const StepFour = ({idPerson, setShowIndex}) => {
   const [error, setError] = useState({});
   const [formData, setFormData] = useState({});
   useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     setLoad(true);
     getLastFeedbackMedicine(idPerson).then(data => {
       data.forEach(obj => {
-        setFormData(obj.data());
-        setLoad(false);
+        let dataQuery = obj.data();
+        const medicamentos = dataQuery.Medicamentos;
+        let newFormData = {};
+        for (let i = 0; i < medicamentos.length; i++) {
+          newFormData['Medicamento ' + (i + 1)] =
+            medicamentos[i]['Medicamento'];
+          newFormData['Horario ' + (i + 1)] = medicamentos[i]['Horario'];
+          newFormData['Dosis ' + (i + 1)] = medicamentos[i]['Dosis'];
+          newFormData['Tipo de Neubolizacion ' + (i + 1)] =
+            medicamentos[i]['TipoNeubolizacion'];
+          newFormData['Cantidad ' + (i + 1)] = medicamentos[i]['Cantidad'];
+        }
+        setFormData(newFormData);
+        setContadorMed(medicamentos.length);
       });
+      setLoad(false);
     });
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    if (
-      formData['Medicamentos'] !== undefined &&
-      formData['Medicamentos'].length > 0
-    ) {
-      setContadorMed(formData['Medicamentos'].length);
-    }
   }, []);
   const labels = [
     'Parametros Ventilatorios',
@@ -47,12 +54,7 @@ const StepFour = ({idPerson, setShowIndex}) => {
   ];
 
   const nextStep = formData => {
-    let validation = [
-      {
-        isRequired: true,
-        obj: 'Reporte Final',
-      },
-    ];
+    let validation = [];
     for (let i = 0; i < contadorMed; i++) {
       validation.push(
         {isRequired: true, obj: 'Medicamento ' + (i + 1)},
@@ -83,15 +85,24 @@ const StepFour = ({idPerson, setShowIndex}) => {
         medicamentos.push({
           Medicamento: formDataSave['Medicamento ' + (i + 1)],
           Horario: formDataSave['Horario ' + (i + 1)],
+          Dosis:
+            formDataSave['Dosis ' + (i + 1)] !== undefined
+              ? formDataSave['Dosis ' + (i + 1)]
+              : '',
+          Cantidad:
+            formDataSave['Cantidad ' + (i + 1)] !== undefined
+              ? formDataSave['Cantidad ' + (i + 1)]
+              : '',
+          TipoNeubolizacion: formDataSave['Tipo de Neubolizacion ' + (i + 1)],
         });
       }
-      for (let i = 0; i < contadorMed; i++) {
-        delete formDataSave['Medicamento ' + (i + 1)];
-        delete formDataSave['Horario ' + (i + 1)];
-      }
-      formDataSave['Medicamentos'] = medicamentos;
+      const DataSave = {
+        Medicamentos: medicamentos,
+        FechaSeguimiento: new Date(),
+      };
       try {
-        await saveFeedbackMedicine(formDataSave, idPerson);
+        await saveFeedbackMedicine(DataSave, idPerson);
+
         setLoad(false);
         setAlerts({
           show: true,
@@ -116,7 +127,7 @@ const StepFour = ({idPerson, setShowIndex}) => {
     );
   };
   return (
-    <Box safeAreaTop mt={5}>
+    <Box safeAreaTop mt={5} h="100%">
       <ScrollView w={'100%'} alignContent={'center'}>
         <Box alignItems={'center'}>
           <VStack alignItems={'center'} flex="1" w="85%">
@@ -201,18 +212,6 @@ const StepFour = ({idPerson, setShowIndex}) => {
               error={error}
             />
             <Divider my={1} />
-            <Text fontSize={'xl'} bold my={3}>
-              Reporte Final
-            </Text>
-            <Input
-              placeholder="Reporte Final"
-              type="textarea"
-              label="Reporte Final"
-              name="Reporte Final"
-              errors={error}
-              form={formData}
-              setForm={setFormData}
-            />
             <Button
               color="emerald.300"
               boldText={false}
