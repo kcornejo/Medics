@@ -181,7 +181,11 @@ const Home = ({setShowIndex}) => {
                 </Pressable>
               </HStack>
               <HStack space={'5%'} h={'25%'}>
-                <Pressable w="47.5%">
+                <Pressable
+                  w="47.5%"
+                  onPress={() => {
+                    setShowIndex(5);
+                  }}>
                   {({isHovered, isFocused, isPressed}) => {
                     return (
                       <Box
