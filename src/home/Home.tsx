@@ -212,7 +212,11 @@ const Home = ({setShowIndex}) => {
                     );
                   }}
                 </Pressable>
-                <Pressable w="47.5%">
+                <Pressable
+                  w="47.5%"
+                  onPress={() => {
+                    setShowIndex(6);
+                  }}>
                   {({isHovered, isFocused, isPressed}) => {
                     return (
                       <Box
