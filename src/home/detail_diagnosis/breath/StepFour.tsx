@@ -11,7 +11,11 @@ import {
   MinusIcon,
 } from 'native-base';
 import {Input} from '../../../components/Input';
-import {AlertMedicsContext, LoadContext} from '../../../support/Context';
+import {
+  AlertMedicsContext,
+  LoadContext,
+  UserContext,
+} from '../../../support/Context';
 import {LogBox} from 'react-native';
 import {validationForm} from '../../../support/Support';
 import {saveFeedbackMedicine, getLastFeedbackMedicine} from '../../Firebase';
@@ -19,6 +23,8 @@ import Medicaments from './Medicaments';
 import Button from '../../../components/Button';
 const StepFour = ({idPerson, setShowIndex}) => {
   const [load, setLoad] = useContext(LoadContext);
+
+  const [user, setUser] = useContext(UserContext);
   const [contadorMed, setContadorMed] = useState(1);
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [error, setError] = useState({});
@@ -80,6 +86,7 @@ const StepFour = ({idPerson, setShowIndex}) => {
       setLoad(true);
       let formDataSave = formData;
       formDataSave['FechaSeguimiento'] = new Date();
+      formDataSave['Usuario'] = user.email;
       let medicamentos = [];
       for (let i = 0; i < contadorMed; i++) {
         medicamentos.push({

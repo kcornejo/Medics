@@ -3,7 +3,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import Steps from './Steps';
 import {LogBox, Alert, Platform} from 'react-native';
 import {Input} from '../components/Input';
-import {AlertMedicsContext, LoadContext} from '../support/Context';
+import {AlertMedicsContext, LoadContext, UserContext} from '../support/Context';
 import {validationForm} from '../support/Support';
 import {savePerson} from './Firebase';
 import Button from '../components/Button';
@@ -17,6 +17,7 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const labels = ['Información General', 'Información Específica'];
   const [load, setLoad] = useContext(LoadContext);
+  const [user, setUser] = useContext(UserContext);
   const optionsGenero = [
     {value: 'Masculino', label: 'Masculino'},
     {value: 'Femenino', label: 'Femenino'},
@@ -49,6 +50,7 @@ const MoreInfoPerson = ({setVentana, formData, setFormData, setIdPerson}) => {
       let formDataSave = formData;
       formDataSave['FechaIngreso'] = new Date();
       formDataSave['Cerrado'] = false;
+      formDataSave['Usuario'] = user.email;
       try {
         const id = await savePerson(formData);
         setIdPerson(id);

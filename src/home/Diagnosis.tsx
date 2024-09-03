@@ -11,6 +11,7 @@ const Diagnosis = ({setVentana, formData, setFormData}) => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   const [load, setLoad] = useContext(LoadContext);
   const labels = ['Info General', 'Info Específica', 'Diagnóstico'];
+  const [user, setUser] = useContext(UserContext);
   const nextStep = formData => {
     const validation = [
       {
@@ -22,6 +23,7 @@ const Diagnosis = ({setVentana, formData, setFormData}) => {
       setLoad(true);
       let formDataSave = formData;
       formDataSave['FechaIngreso'] = new Date();
+      formDataSave['Usuario'] = user.email;
       try {
         await savePerson(formData);
         Alert.alert(
