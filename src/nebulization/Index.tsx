@@ -3,7 +3,6 @@ import {ListBedsSupport} from '../list_beds/ListBedsSupport';
 import LinearGradient from 'react-native-linear-gradient';
 import {Box, ScrollView, VStack} from 'native-base';
 import Button from '../components/Button';
-import Loading from '../support/Loading';
 import StepFour from '../home/detail_diagnosis/breath/StepFour';
 import AlertMedics from '../support/AlertMedics';
 interface PropsIndex {

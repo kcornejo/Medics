@@ -10,7 +10,6 @@ import {
   HStack,
   MinusIcon,
 } from 'native-base';
-import {Input} from '../../../components/Input';
 import {
   AlertMedicsContext,
   LoadContext,

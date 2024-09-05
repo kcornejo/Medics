@@ -1078,14 +1078,14 @@ PODS:
     - React-perflogger (= 0.71.6)
   - RNDateTimePicker (7.0.1):
     - React-Core
-  - RNFBApp (17.4.2):
+  - RNFBApp (17.5.0):
     - Firebase/CoreOnly (= 10.7.0)
     - React-Core
-  - RNFBAuth (17.4.2):
+  - RNFBAuth (17.5.0):
     - Firebase/Auth (= 10.7.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (17.4.2):
+  - RNFBFirestore (17.5.0):
     - Firebase/Firestore (= 10.7.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - React-Core
@@ -1316,9 +1316,9 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 8692ac548bec648fa121980ccb4304afd136d584
   ReactCommon: 0982e4657e0ecdc3a90858fbb529d54cd0be8fb4
   RNDateTimePicker: e073697ac3e8a378968d68ab0581fef542b8af8a
-  RNFBApp: 55dbfc574e5ae414f2984394934f79f87eb4b050
-  RNFBAuth: d30acc0f5f169bc28c7fcbf1b45cd061cc647590
-  RNFBFirestore: c505e6f96e70fb029ae1961c73965fd13ce92db5
+  RNFBApp: d59efa0872fff4e27de03cca3c528c203a436ae5
+  RNFBAuth: 54e598bb1358a0cf6c0a187f43161cd1bde90455
+  RNFBFirestore: 4edfb28f95cb461ef8423c6ae4354dfe98186586
   RNImageCropPicker: 771e2ca319d2cf92e04ebf334ece892ee9a6728f
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8

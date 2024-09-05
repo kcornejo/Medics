@@ -1,11 +1,14 @@
 import React from 'react';
 import {Pressable, Box, Text} from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Button = ({
   onPress,
   text,
   color,
   colorClick,
   icon = '',
+  colorIcon = 'grey',
+  sizeIcon = 30,
   w,
   mb = 0,
   mt = 0,
@@ -37,6 +40,11 @@ const Button = ({
               fontSize="xl"
               textAlign="center">
               {text}
+              {icon != '' ? (
+                <Icon name={icon} size={sizeIcon} color={colorIcon}></Icon>
+              ) : (
+                <></>
+              )}
             </Text>
           </Box>
         );

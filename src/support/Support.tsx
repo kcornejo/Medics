@@ -1,5 +1,7 @@
 import React from 'react';
-
+export const uniqid = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+};
 const validationsObjV2 = (data: any, validations: any) => {
   let error = false;
   let list = [];
