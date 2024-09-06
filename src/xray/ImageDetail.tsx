@@ -36,13 +36,13 @@ export const ImageDetail: FC<ImageDetailInterface> = ({list, setList}) => {
     );
   };
   for (let i = 0; i < list.length; i++) {
-    let img = <ImageComplete uri={list[i].url} i={i} />;
+    let img = <ImageComplete key={i} uri={list[i].url} i={i} />;
     if (i < list.length - 1) {
       i++;
       img = (
-        <HStack>
+        <HStack key={`h_stack_${i}`}>
           {img}
-          <ImageComplete uri={list[i].url} i={i} />
+          <ImageComplete key={i} uri={list[i].url} i={i} />
         </HStack>
       );
     }

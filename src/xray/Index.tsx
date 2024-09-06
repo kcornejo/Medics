@@ -16,7 +16,7 @@ interface PropsIndex {
 
 export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
   const [load, setLoad] = React.useContext(LoadContext);
-  const [alerts, setAlerts] = useContext(AlertMedicsContext);
+  const [alerts, setAlerts] = React.useContext(AlertMedicsContext);
   const [patient, setPatient] = React.useState<any>({});
   const [xray, setXRay] = React.useState(true);
   const functionClickIndex = function () {
@@ -59,8 +59,12 @@ export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
   };
   const save = async () => {
     setLoad(true);
-    await saveXray(listImage, patient.id);
-    await cleanTmp();
+    await saveXray(listImage, patient.id).catch(() => {
+      setLoad(false);
+    });
+    await cleanTmp().catch(() => {
+      setLoad(false);
+    });
     setLoad(false);
     setAlerts({
       show: true,
