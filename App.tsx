@@ -8,7 +8,13 @@ import {NativeBaseProvider} from 'native-base';
 import Loading from './src/support/Loading';
 import Login from './src/security/Login';
 import Main from './src/Main';
+import {LogBox} from 'react-native';
 function App() {
+  React.useEffect(() => {
+    LogBox.ignoreLogs([
+      'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
+    ]);
+  }, []);
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState({
     auth: false,

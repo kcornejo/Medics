@@ -39,12 +39,9 @@ export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
       width: 300,
       height: 400,
       cropping: true,
-      multiple: true,
     })
-      .then(images => {
-        for (let i = 0; i < images.length; i++) {
-          addImage(images[i].path);
-        }
+      .then(image => {
+        addImage(image.path.toString());
       })
       .finally(() => {});
   };
