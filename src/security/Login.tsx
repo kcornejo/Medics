@@ -102,7 +102,7 @@ const Login = () => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Box alignItems="center" w="100%" style={{flex: 1}}>
+            <Box alignItems="center" w="100%" style={{flex: 1}} safeAreaTop>
               <Box w="100%" maxW={400} mt={10} mb={10}>
                 <VStack alignItems="center">
                   <LinearGradient
