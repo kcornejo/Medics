@@ -94,16 +94,12 @@ export const Index: FC<PropsIndex> = ({setShowIndex}) => {
           </Box>
         ) : (
           <Box h={'100%'} mx={'5%'}>
-            <VStack safeAreaTop mt="15%">
-              <ScrollView w={'100%'} alignContent={'center'}>
-                <Box h={'85%'}>
-                  <ListBedsSupport
-                    setPatient={setPatient}
-                    functionClick={functionClickIndex}></ListBedsSupport>
-                </Box>
-              </ScrollView>
-            </VStack>
-            <Box h={'15%'} justifyContent={'flex-end'}>
+            <Box safeAreaTop h={'85%'}>
+              <ListBedsSupport
+                setPatient={setPatient}
+                functionClick={functionClickIndex}></ListBedsSupport>
+            </Box>
+            <Box h={'15%'}>
               <Button
                 color="info.600"
                 boldText={false}

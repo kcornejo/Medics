@@ -14,7 +14,7 @@ const AlertMedics = () => {
   const [alerts, setAlerts] = useContext(AlertMedicsContext);
   return (
     <Collapse isOpen={alerts.show}>
-      <Alert status={alerts.type} pt={5}>
+      <Alert status={alerts.type} safeAreaTop>
         <VStack space={1} flexShrink={1} w="100%">
           <HStack
             flexShrink={1}

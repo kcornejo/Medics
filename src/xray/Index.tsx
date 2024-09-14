@@ -78,13 +78,11 @@ export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
         {xray ? (
           <Box h={'100%'} mx={'5%'}>
             <VStack safeAreaTop h={'85%'}>
-              <ScrollView w={'100%'} alignContent={'center'}>
-                <Box h={'85%'}>
-                  <ListBedsSupport
-                    setPatient={setPatient}
-                    functionClick={functionClickIndex}></ListBedsSupport>
-                </Box>
-              </ScrollView>
+              <Box h={'100%'}>
+                <ListBedsSupport
+                  setPatient={setPatient}
+                  functionClick={functionClickIndex}></ListBedsSupport>
+              </Box>
             </VStack>
             <Box h={'15%'}>
               <Button

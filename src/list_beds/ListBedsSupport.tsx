@@ -1,4 +1,4 @@
-import {HStack, Box, Pressable} from 'native-base';
+import {HStack, Box, Pressable, VStack} from 'native-base';
 import React, {FC, useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {BedUsed} from '../home/Firebase';
@@ -78,52 +78,54 @@ export const ListBedsSupport: FC<any> = ({setPatient, functionClick}) => {
   }, [0]);
   return (
     <>
-      <Box>
-        <HStack space={'3.33%'} w={'100%'} h={'20'}>
-          <RowButtons
-            num_min={1}
-            num_max={3}
-            beds={beds}
-            setPatient={setPatient}
-            functionClick={functionClick}
-          />
-        </HStack>
-        <HStack space={'3.33%'} w={'100%'} h={'20'}>
-          <RowButtons
-            num_min={4}
-            num_max={6}
-            beds={beds}
-            setPatient={setPatient}
-            functionClick={functionClick}
-          />
-        </HStack>
-        <HStack space={'3.33%'} w={'100%'} h={'20'}>
-          <RowButtons
-            num_min={7}
-            num_max={9}
-            beds={beds}
-            functionClick={functionClick}
-            setPatient={setPatient}
-          />
-        </HStack>
-        <HStack space={'3.33%'} w={'100%'} h={'20'}>
-          <RowButtons
-            num_min={10}
-            num_max={12}
-            functionClick={functionClick}
-            beds={beds}
-            setPatient={setPatient}
-          />
-        </HStack>
-        <HStack space={'3.33%'} w={'100%'} h={'20'}>
-          <RowButtons
-            num_min={13}
-            num_max={15}
-            functionClick={functionClick}
-            beds={beds}
-            setPatient={setPatient}
-          />
-        </HStack>
+      <Box h={'100%'}>
+        <VStack h={'100%'}>
+          <HStack w={'100%'} h={'20%'}>
+            <RowButtons
+              num_min={1}
+              num_max={3}
+              beds={beds}
+              setPatient={setPatient}
+              functionClick={functionClick}
+            />
+          </HStack>
+          <HStack space={'3.33%'} w={'100%'} h={'20%'}>
+            <RowButtons
+              num_min={4}
+              num_max={6}
+              beds={beds}
+              setPatient={setPatient}
+              functionClick={functionClick}
+            />
+          </HStack>
+          <HStack space={'3.33%'} w={'100%'} h={'20%'}>
+            <RowButtons
+              num_min={7}
+              num_max={9}
+              beds={beds}
+              functionClick={functionClick}
+              setPatient={setPatient}
+            />
+          </HStack>
+          <HStack space={'3.33%'} w={'100%'} h={'20%'}>
+            <RowButtons
+              num_min={10}
+              num_max={12}
+              functionClick={functionClick}
+              beds={beds}
+              setPatient={setPatient}
+            />
+          </HStack>
+          <HStack space={'3.33%'} w={'100%'} h={'20%'}>
+            <RowButtons
+              num_min={13}
+              num_max={15}
+              functionClick={functionClick}
+              beds={beds}
+              setPatient={setPatient}
+            />
+          </HStack>
+        </VStack>
       </Box>
     </>
   );

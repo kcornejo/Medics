@@ -58,57 +58,55 @@ export const Index: FC<any> = ({setShowIndex}) => {
               />
             </Box>
             <Box h="65%">
-              <ScrollView w={'100%'} alignContent={'center'}>
-                {buscador === '' && cargando === false ? (
-                  <ListBedsSupport
-                    setPatient={setPatient}
-                    functionClick={functionClick}></ListBedsSupport>
-                ) : (
-                  <>
-                    {cargando ? (
-                      <Box w={'100%'} alignItems={'center'}>
-                        <Image
-                          source={require('../resources/loading.gif')}
-                          alt="Cargando..."
-                          size="2xl"
-                        />
-                      </Box>
-                    ) : (
-                      <>
-                        {div.map(function (object, i) {
-                          return (
-                            <Box
-                              my={'1'}
-                              w={'100%'}
-                              borderRadius={'2xl'}
-                              bg={
-                                object.Genero == 'Femenino'
-                                  ? 'red.100'
-                                  : 'blue.100'
-                              }
-                              key={i}
-                              p={2}>
-                              <Text bold fontSize={'xl'}>
-                                {object.Nombre}
-                              </Text>
-                              <Text>
-                                <Text bold>Edad: </Text>
-                                {object.Edad}
-                              </Text>
-                              <Text>
-                                <Text bold>Diagnostico: </Text>
-                                {object.Diagnostico}
-                              </Text>
-                            </Box>
-                          );
-                        })}
-                      </>
-                    )}
-                  </>
-                )}
-              </ScrollView>
+              {buscador === '' && cargando === false ? (
+                <ListBedsSupport
+                  setPatient={setPatient}
+                  functionClick={functionClick}></ListBedsSupport>
+              ) : (
+                <>
+                  {cargando ? (
+                    <Box w={'100%'} alignItems={'center'}>
+                      <Image
+                        source={require('../resources/loading.gif')}
+                        alt="Cargando..."
+                        size="2xl"
+                      />
+                    </Box>
+                  ) : (
+                    <ScrollView w={'100%'} alignContent={'center'}>
+                      {div.map(function (object, i) {
+                        return (
+                          <Box
+                            my={'1'}
+                            w={'100%'}
+                            borderRadius={'2xl'}
+                            bg={
+                              object.Genero == 'Femenino'
+                                ? 'red.100'
+                                : 'blue.100'
+                            }
+                            key={i}
+                            p={2}>
+                            <Text bold fontSize={'xl'}>
+                              {object.Nombre}
+                            </Text>
+                            <Text>
+                              <Text bold>Edad: </Text>
+                              {object.Edad}
+                            </Text>
+                            <Text>
+                              <Text bold>Diagnostico: </Text>
+                              {object.Diagnostico}
+                            </Text>
+                          </Box>
+                        );
+                      })}
+                    </ScrollView>
+                  )}
+                </>
+              )}
             </Box>
-            <Box h={'15%'} justifyContent={'flex-end'}>
+            <Box h={'15%'}>
               <Button
                 color="info.600"
                 boldText={false}
