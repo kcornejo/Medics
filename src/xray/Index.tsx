@@ -77,7 +77,7 @@ export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
       <LinearGradient colors={['#ffffff', '#b3e5fc']}>
         {xray ? (
           <Box h={'100%'} mx={'5%'}>
-            <VStack safeAreaTop mt="15%">
+            <VStack safeAreaTop h={'85%'}>
               <ScrollView w={'100%'} alignContent={'center'}>
                 <Box h={'85%'}>
                   <ListBedsSupport
@@ -86,7 +86,7 @@ export const Index: React.FC<PropsIndex> = ({setShowIndex}) => {
                 </Box>
               </ScrollView>
             </VStack>
-            <Box h={'15%'} justifyContent={'flex-end'}>
+            <Box h={'15%'}>
               <Button
                 color="info.600"
                 boldText={false}
